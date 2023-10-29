@@ -1,9 +1,5 @@
-# Symfony Docker
-
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,
-with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!
-
-![CI](https://github.com/dunglas/symfony-docker/workflows/CI/badge.svg)
+# Mordor app
+Mordor app for RSP project.
 
 ## Getting Started
 
@@ -24,25 +20,13 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 3. Update env variables in .env file servers.json to match your needs.
 4. Work with src folder to develop your application.
 5. For working with symfony console, run `docker compose exec symfony php bin/console` to access the console.
-    For example, run `docker compose exec symfony php bin/console doctrine:migrations:migrate` to run migrations.
+    For example, run `docker compose exec symfony php bin/console make:entity Osoba` to make a new entity Osoba.
 6. For working with composer, run `docker compose exec symfony php composer` to access composer.
 
 ## Migrate database and populate it with dummy data
 1. Run `docker compose exec symfony php bin/console doctrine:migrations:migrate` to run migrations.
 2. Run `docker compose exec symfony php bin/console doctrine:migrations:diff` to generate migrations.
 3. Run `docker exec symfony php bin/console doctrine:fixtures:load --append` to load fixtures.
-
-## Features
-* Production, development and CI ready
-* Just 1 service by default
-* Blazing-fast performance thanks to [the worker mode of FrankenPHP](https://github.com/dunglas/frankenphp/blob/main/docs/worker.md) (automatically enabled in prod mode)
-* [Installation of extra Docker Compose services](docs/extra-services.md) with Symfony Flex
-* Automatic HTTPS (in dev and prod)
-* HTTP/3 and [Early Hints](https://symfony.com/blog/new-in-symfony-6-3-early-hints) support
-* Real-time messaging thanks to a built-in [Mercure hub](https://symfony.com/doc/current/mercure.html)
-* [Vulcain](https://vulcain.rocks) support
-* Native [XDebug](docs/xdebug.md) integration
-* Super-readable configuration
 
 ## Docs
 
@@ -55,10 +39,5 @@ with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) 
 7. [Using a Makefile](docs/makefile.md)
 8. [Troubleshooting](docs/troubleshooting.md)
 
-## License
-
-Symfony Docker is available under the MIT License.
-
 ## Credits
-
-Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+To [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop). Used their symfony docker template.
