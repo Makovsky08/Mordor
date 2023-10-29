@@ -4,7 +4,7 @@ Mordor app for RSP project.
 ## Getting Started
 
 1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-    Or install Docker desktop if working on Windows or Mac.
+    * Or install Docker desktop if working on Windows or Mac.
 3. Install Github desktop if working on Windows or Mac.
 4. Clone this repository
 5. Run `docker compose build --no-cache --pull` to build fresh images
@@ -15,8 +15,8 @@ Mordor app for RSP project.
 ## Usage
 1. Open `https://localhost` in your favorite web browser to access the web application.
 2. Open `http://localhost:5050` in your favorite web browser to access the pgadmin admin panel.
-    email: `admin@example.com`
-    password: `admin`
+    * email: `admin@example.com`
+    * password: `admin`
 3. Update env variables in .env file servers.json to match your needs.
 4. Work with src folder to develop your application.
 5. For working with symfony console, run `docker compose exec symfony php bin/console` to access the console.
