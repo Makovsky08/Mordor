@@ -8,7 +8,7 @@ Mordor app for RSP project.
 3. Install Github desktop if working on Windows or Mac.
 4. Clone this repository
 5. Run `docker compose build --no-cache --pull` to build fresh images
-6. Run `docker compose up --pull -d --wait` to start the project
+6. Run `docker compose up -d --wait` to start the project
 7. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
 8. Run `docker compose down --remove-orphans` to stop the Docker containers.
 
