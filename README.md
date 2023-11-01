@@ -19,15 +19,14 @@ Mordor app for RSP project.
     * password: `admin`
 3. Update env variables in .env file servers.json to match your needs.
 4. Work with src folder to develop your application.
-5. For working with symfony console, run `docker compose exec symfony php bin/console` to access the console.
-    For example, run `docker compose exec symfony php bin/console make:entity Osoba` to make a new entity Osoba.
-    Or `docker-compose -f compose.yaml exec symfony php bin/console make:entity Osoba`
-7. For working with composer, run `docker compose exec symfony php composer` to access composer.
+5. For working with symfony console, run `docker compose exec php ./bin/console` to access the console.
+    For example, run `docker compose exec php ./bin/console make:entity Osoba` to make a new entity Osoba.
+7. For working with composer, run `docker compose exec composer` to access composer.
 
 ## Migrate database and populate it with dummy data
-1. Run `docker compose exec symfony php bin/console doctrine:migrations:migrate` to run migrations.
-2. Run `docker compose exec symfony php bin/console doctrine:migrations:diff` to generate migrations.
-3. Run `docker exec symfony php bin/console doctrine:fixtures:load --append` to load fixtures.
+1. Run `docker compose exec php ./bin/console doctrine:migrations:migrate` to run migrations.
+2. Run `docker compose exec php ./bin/console doctrine:migrations:diff` to generate migrations.
+3. Run `docker exec php ./bin/console doctrine:fixtures:load --append` to load fixtures.
 
 ## Docs
 
