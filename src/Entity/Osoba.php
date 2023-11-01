@@ -34,9 +34,21 @@ class Osoba
     #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'osobas')]
     private Collection $roles;
 
+    #[ORM\OneToMany(mappedBy: 'Autor', targetEntity: Prispevek::class, orphanRemoval: true)]
+    private Collection $prispeveks;
+
+    #[ORM\OneToMany(mappedBy: 'Odkoho', targetEntity: Reakce::class)]
+    private Collection $reakces;
+
+    #[ORM\OneToMany(mappedBy: 'Recenzent', targetEntity: PozadavekNaRecenciPrispevku::class)]
+    private Collection $pozadavekNaRecenciPrispevkus;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
+        $this->prispeveks = new ArrayCollection();
+        $this->reakces = new ArrayCollection();
+        $this->pozadavekNaRecenciPrispevkus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,6 +136,96 @@ class Osoba
     public function removeRole(Role $role): static
     {
         $this->roles->removeElement($role);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Prispevek>
+     */
+    public function getPrispeveks(): Collection
+    {
+        return $this->prispeveks;
+    }
+
+    public function addPrispevek(Prispevek $prispevek): static
+    {
+        if (!$this->prispeveks->contains($prispevek)) {
+            $this->prispeveks->add($prispevek);
+            $prispevek->setAutor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrispevek(Prispevek $prispevek): static
+    {
+        if ($this->prispeveks->removeElement($prispevek)) {
+            // set the owning side to null (unless already changed)
+            if ($prispevek->getAutor() === $this) {
+                $prispevek->setAutor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reakce>
+     */
+    public function getReakces(): Collection
+    {
+        return $this->reakces;
+    }
+
+    public function addReakce(Reakce $reakce): static
+    {
+        if (!$this->reakces->contains($reakce)) {
+            $this->reakces->add($reakce);
+            $reakce->setOdkoho($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReakce(Reakce $reakce): static
+    {
+        if ($this->reakces->removeElement($reakce)) {
+            // set the owning side to null (unless already changed)
+            if ($reakce->getOdkoho() === $this) {
+                $reakce->setOdkoho(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PozadavekNaRecenciPrispevku>
+     */
+    public function getPozadavekNaRecenciPrispevkus(): Collection
+    {
+        return $this->pozadavekNaRecenciPrispevkus;
+    }
+
+    public function addPozadavekNaRecenciPrispevku(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    {
+        if (!$this->pozadavekNaRecenciPrispevkus->contains($pozadavekNaRecenciPrispevku)) {
+            $this->pozadavekNaRecenciPrispevkus->add($pozadavekNaRecenciPrispevku);
+            $pozadavekNaRecenciPrispevku->setRecenzent($this);
+        }
+
+        return $this;
+    }
+
+    public function removePozadavekNaRecenciPrispevku(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    {
+        if ($this->pozadavekNaRecenciPrispevkus->removeElement($pozadavekNaRecenciPrispevku)) {
+            // set the owning side to null (unless already changed)
+            if ($pozadavekNaRecenciPrispevku->getRecenzent() === $this) {
+                $pozadavekNaRecenciPrispevku->setRecenzent(null);
+            }
+        }
 
         return $this;
     }
