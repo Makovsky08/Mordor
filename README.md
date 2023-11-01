@@ -21,7 +21,8 @@ Mordor app for RSP project.
 4. Work with src folder to develop your application.
 5. For working with symfony console, run `docker compose exec symfony php bin/console` to access the console.
     For example, run `docker compose exec symfony php bin/console make:entity Osoba` to make a new entity Osoba.
-6. For working with composer, run `docker compose exec symfony php composer` to access composer.
+    Or `docker-compose -f compose.yaml exec symfony php bin/console make:entity Osoba`
+7. For working with composer, run `docker compose exec symfony php composer` to access composer.
 
 ## Migrate database and populate it with dummy data
 1. Run `docker compose exec symfony php bin/console doctrine:migrations:migrate` to run migrations.
