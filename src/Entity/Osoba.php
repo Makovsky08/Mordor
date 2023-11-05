@@ -7,10 +7,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: OsobaRepository::class)]
 class Osoba
 {
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -32,7 +37,12 @@ class Osoba
     private ?string $heslo = null;
 
     #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'osobas')]
+    #[ORM\JoinTable(name: 'osoba_role')]
+    #[ORM\JoinColumn(name: 'osoba_id', referencedColumnName: 'id')]
+    #[ORM\InverseJoinColumn(name: 'role_id', referencedColumnName: 'id')]
     private Collection $roles;
+
+
 
     public function __construct()
     {
@@ -105,26 +115,68 @@ class Osoba
     }
 
     /**
-     * @return Collection<int, Role>
+     * @return Role[]
      */
-    public function getRoles(): Collection
+    public function getRoles(): array
     {
-        return $this->roles;
+        return $this->roles->toArray();
     }
 
-    public function addRole(Role $role): static
+        /**
+     * @return string[]
+     */
+    public function getRoleStrings(): array
+    {
+        return $this->roles->map(function ($role) {
+            return (string) $role;
+        })->toArray();
+    }
+
+    public function addRole(Role $role): self
     {
         if (!$this->roles->contains($role)) {
-            $this->roles->add($role);
+            $this->roles[] = $role;
         }
 
         return $this;
     }
 
-    public function removeRole(Role $role): static
+    public function removeRole(Role $role): self
     {
         $this->roles->removeElement($role);
 
         return $this;
     }
+
+    public function getPassword(): string
+    {
+        // Assuming you have a password property
+        return $this->heslo;
+    }
+
+    public function setPassword(string $password): self {
+        $this->heslo = $password;
+        return $this;
+    }
+
+    public function getSalt(): ?string
+    {
+        // If you are using bcrypt or argon2i, the salt is not needed
+        return null;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        // Use the property that represents the username in your entity
+        return $this->email; // or username if it's a username
+    }
+
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
 }
+
+
+

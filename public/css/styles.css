@@ -1,0 +1,19 @@
+/* public/css/styles.css */
+.zelena {
+    color: green;
+}
+
+
+.licha {
+    background-color: green;
+    color: white;
+}
+
+.suda {
+    background-color: blue;
+    color: white;
+}
+
+.edit-container .delete-form {
+    display: block;
+}

@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class RoleFixture extends Fixture
 {
-    public const ROLES = ['Autor', 'Redaktor', 'Šéfredaktor', 'Recenzent', 'Admin'];
+    public const ROLES = ['ROLE_AUTOR', 'ROLE_ADMIN', 'ROLE_RECENZENT', 'ROLE_REDAKTOR', 'ROLE_SEFREDAKTOR'];
 
     public function load(ObjectManager $manager)
     {
