@@ -3,7 +3,6 @@ version: "3.4"
 services:
   php:
     image: ${IMAGES_PREFIX:-}app-php
-    container_name: symfony2
     restart: unless-stopped
     environment:
       SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
@@ -45,7 +44,6 @@ services:
 ###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-15}-alpine
-    container_name: database2
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-app}
       # You should definitely change the password in production
@@ -57,7 +55,6 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin2
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@example.com}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}

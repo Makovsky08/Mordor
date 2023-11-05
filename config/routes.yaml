@@ -3,18 +3,6 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
-text_route:
-    path: '/text'
-    controller: App\Controller\TextController::index
-osoba_getter:
-    path: /getter
-    controller: App\Controller\OsobaController::getterAction
-poslipole:
-    path: /poslipole
-    controller: App\Controller\TextController::poslipoleAction
-poslipolevpoli:
-    path: /poslipolevpoli
-    controller: App\Controller\TextController::poslipolevpoliAction
 home:
     path: '/'
     controller: App\Controller\OsobaController::index

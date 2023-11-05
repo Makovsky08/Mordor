@@ -4,6 +4,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Osoba;
+use App\Security\OsobaUserAdapter;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -30,12 +31,17 @@ class OsobaFixture extends Fixture implements DependentFixtureInterface
             // Set other properties like username, etc.
             // ...
 
+            $osobaAdapter = new OsobaUserAdapter($user);
+
             // Hash the password
             $plaintextPassword = 'password123'; // The plaintext password you want to set
             $hashedPassword = $this->passwordHasher->hashPassword(
-                $user,
+                $osobaAdapter,
                 $plaintextPassword
             );
+
+
+            $osobaAdapter->setPassword($hashedPassword);
 
             // Set the hashed password
             $user->setHeslo($hashedPassword);
