@@ -1,72 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Default Title{% endblock %}</title>
-<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-
-    <header>
-        <!-- Common header content goes here -->
-    </header>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light px-3 justify-content-between">
-    <div class="container">
-        <a class="navbar-brand" href="{{ path('app_osoba_index') }}">Správa osob</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto pr-3"> {# Added pr-3 for padding on the right #}
-                {% if app.user %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Logged in as {{ app.user.jmeno }}</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRoles" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Roles
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownRoles">
-                        {% for role in app.user.roles %}
-                            <a class="dropdown-item" href="#">{{ role }}</a> {# Assuming your Role entity has a __toString method #}
-                        {% endfor %}
-                    </div>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav>
-
-    {# Main content block #}
-    <div class="container mt-4">
-        <div class="row justify-content-center">
-            <div class="col-lg-auto"> {# Adjust 'md' and '8' as needed for your design #}
-                {% block content %}
-                {# The content of each page will go here #}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}Default Title{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        />
+    </head>
+    <body>
+        <div class="container__main">
+            <aside>
+                <header>
+                    <h1 class="heading">
+                        <strong>Mordor</strong><span>Časopis VŠPJ</span>
+                    </h1>
+                </header>
+                {% block user %}
+                <!-- Přihlášený uživatel -->
+                {% endblock %} {% block navbar %}
+                <!-- Odkazy na články, přihlášení, atd. -->
                 {% endblock %}
+            </aside>
+            <div class="wrapper">
+                <div class="statement">
+                    <p>
+                        Tato aplikace je výsledkem školního projektu v kurzu
+                        Řízení SW projektů na Vysoké škole polytechnické
+                        Jihlava.
+                        <br />
+                        Nejedná se o stránky skutečného odborného časopisu!
+                    </p>
+                </div>
+                <main>
+                    {% block content %}
+                    <!-- Jedinečný obsah pro každou stránku -->
+                    {% endblock %}
+                </main>
+                <footer class="footer">
+                    <div class="footer__left">Mordor</div>
+                    <div class="footer__right">
+                        &copy; 2023 | All rights reserved.
+                    </div>
+                </footer>
             </div>
         </div>
-</div>
-
-    <footer>
-        <!-- Common footer content goes here -->
-    </footer>
-</body>
+    </body>
 </html>
