@@ -1,19 +1,9 @@
 /* public/css/styles.css */
-.zelena {
-    color: green;
-}
-
-
-.licha {
-    background-color: green;
-    color: white;
-}
-
-.suda {
-    background-color: blue;
-    color: white;
-}
-
-.edit-container .delete-form {
-    display: block;
-}
+@import url("normalize.css");
+@import url("variables.css");
+@import url("layout.css");
+@import url("components/buttons.css");
+@import url("components/forms.css");
+@import url("components/navbar.css");
+@import url("utilities/typography.css");
+@import url("utilities/display.css");
