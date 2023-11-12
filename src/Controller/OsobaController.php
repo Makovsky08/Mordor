@@ -32,7 +32,7 @@ class OsobaController extends AbstractController
     {
         $this->logger->info('Index method called');
 
-        return $this->render('osoba/index.html.twig', [
+        return $this->render('Osoba/index.html.twig', [
             'osobas' => $osobaRepository->findAll(),
 
         ]);
