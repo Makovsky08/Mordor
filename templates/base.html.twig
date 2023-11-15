@@ -27,11 +27,23 @@
 
                         <li>
                         Roles
-                        <div>
-                            {% for role in app.user.roles %}
-                                <a class="dropdown-item" href="#">{{ role }}</a>
-                            {% endfor %}
-                        </div>
+                            <div>
+                                {% for role in app.user.roles %}
+                                    {% if role == 'ROLE_ADMIN' %}
+                                        <a class="dropdown-item" href="/admin">{{ role }}</a>
+                                    {% elseif role == 'ROLE_AUTOR' %}
+                                        <a class="dropdown-item" href="/autor">{{ role }}</a>
+                                    {% elseif role == 'ROLE_RECENZENT' %}
+                                        <a class="dropdown-item" href="/recenzent">{{ role }}</a>
+                                    {% elseif role == 'ROLE_REDAKTOR' %}
+                                        <a class="dropdown-item" href="/redaktor">{{ role }}</a>
+                                    {% elseif role == 'ROLE_SEFREDAKTOR' %}
+                                        <a class="dropdown-item" href="/sefredaktor">{{ role }}</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">{{ role }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
                         </li>
 
                         <li>
