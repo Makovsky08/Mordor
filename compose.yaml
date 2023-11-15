@@ -64,6 +64,15 @@ services:
       - "${PGADMIN_PORT:-5050}:80"
     depends_on:
       - database  # Ensure the database container starts before pgAdmin
+      
+  node:
+    image: node:latest  # Or use the same image as your PHP service
+    working_dir: /app  # Set the working directory
+    volumes:
+      - .:/app  # Mount the application code
+    command: npm run watch  # Run npm watch
+    depends_on:
+      - php  # Ensure that the PHP service is started first
 
 volumes:
   caddy_data:

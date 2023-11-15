@@ -39,7 +39,8 @@ RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
 	apk add --no-cache --virtual .pgsql-rundeps so:libpq.so.5; \
 	apk del .pgsql-deps
 ###< doctrine/doctrine-bundle ###
-
+RUN apk add --no-cache nodejs npm
+RUN npm install --global yarn
 ###< recipes ###
 
 
@@ -90,6 +91,9 @@ COPY --link frankenphp/worker.Caddyfile /etc/caddy/worker.Caddyfile
 COPY --link composer.* symfony.* ./
 RUN set -eux; \
 	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
+
+COPY --link package.json yarn.lock ./
+RUN yarn install
 
 # copy sources
 COPY --link . ./
