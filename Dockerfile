@@ -40,6 +40,10 @@ RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
 	apk del .pgsql-deps
 ###< doctrine/doctrine-bundle ###
 RUN apk add --no-cache nodejs npm
+RUN npm install --global yarn
+COPY --link package.json yarn.lock ./
+RUN npm install
+RUN yarn install
 ###< recipes ###
 
 
@@ -71,6 +75,10 @@ RUN set -eux; \
 		xdebug \
 	;
 
+COPY --link package.json yarn.lock ./
+RUN npm install
+RUN yarn install
+
 COPY --link frankenphp/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
 
 CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile", "--watch" ]
@@ -93,6 +101,7 @@ RUN set -eux; \
 
 COPY --link package.json yarn.lock ./
 RUN npm install
+RUN yarn install
 
 # copy sources
 COPY --link . ./
