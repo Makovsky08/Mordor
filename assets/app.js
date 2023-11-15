@@ -7,3 +7,9 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import "./styles/app.scss";
+import "./icons/about.svg";
+import "./icons/add.svg";
+import "./icons/articles.svg";
+import "./icons/helpdesk.svg";
+import "./icons/login.svg";
+import "./icons/logout.svg";
