@@ -29,7 +29,7 @@ Mordor app for RSP project.
 
 1. Run `docker compose exec php ./bin/console doctrine:migrations:migrate` to run migrations.
 2. Run `docker compose exec php ./bin/console doctrine:migrations:diff` to generate migrations.
-3. Run `docker exec php ./bin/console doctrine:fixtures:load --append` to load fixtures.
+3. Run `docker compose exec php ./bin/console doctrine:fixtures:load --append` to load fixtures.
 
 ## Docs
 
