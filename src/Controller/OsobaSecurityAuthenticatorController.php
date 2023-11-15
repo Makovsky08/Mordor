@@ -12,9 +12,35 @@ class OsobaSecurityAuthenticatorController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        // Check if the user is already logged in
+        $user = $this->getUser();
+        if ($user) {
+            $roles = $user->getRoles();
+
+            if (empty($roles)) {
+                // If no roles, redirect to default page
+                return $this->redirectToRoute('app_prispevek_index');
+            } elseif (count($roles) > 1) {
+                // If multiple roles, redirect to default page
+                return $this->redirectToRoute('app_prispevek_index');
+            }
+
+            // Define redirections based on roles
+            if (in_array('ROLE_ADMIN', $roles)) {
+                return $this->redirectToRoute('app_admin');
+            } elseif (in_array('ROLE_AUTOR', $roles)) {
+                return $this->redirectToRoute('app_autor');
+            } elseif (in_array('ROLE_RECENZENT', $roles)) {
+                return $this->redirectToRoute('app_recenzent');
+            } elseif (in_array('ROLE_REDAKTOR', $roles)) {
+                return $this->redirectToRoute('app_redaktor');
+            } elseif (in_array('ROLE_SEFREDAKTOR', $roles)) {
+                return $this->redirectToRoute('app_sef_redaktor');
+            }
+            // Add more role checks if needed
+
+            return $this->redirectToRoute('app_prispevek_index');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
