@@ -1,4 +1,6 @@
 const Encore = require("@symfony/webpack-encore");
+const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
+const path = require("path");
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -59,7 +61,29 @@ Encore
     options.sassOptions = {
       outputStyle: "compressed",
     };
-  });
+  })
+
+  .addRule({
+    test: /\.svg$/,
+    use: [
+      {
+        loader: "svg-sprite-loader",
+        options: {
+          extract: true,
+          spriteFilename: "sprites.[hash]svg",
+        },
+      },
+    ],
+    include: path.resolve(__dirname, "assets/icons"),
+  })
+
+  //   .copyFiles({
+  //     from: "./assets/icons",
+  //     to: "icons/[path][name].[ext]",
+  //     pattern: /\.svg$/,
+  //   })
+
+  .addPlugin(new SpriteLoaderPlugin({ plainSprite: true }));
 
 // uncomment if you use TypeScript
 //.enableTypeScriptLoader()
