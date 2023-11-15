@@ -11,7 +11,7 @@ class RedaktorController extends AbstractController
     #[Route('/redaktor', name: 'app_redaktor')]
     public function index(): Response
     {
-        return $this->render('redaktor/index.html.twig', [
+        return $this->render('Redaktor/index.html.twig', [
             'controller_name' => 'RedaktorController',
         ]);
     }

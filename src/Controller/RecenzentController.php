@@ -11,7 +11,7 @@ class RecenzentController extends AbstractController
     #[Route('/recenzent', name: 'app_recenzent')]
     public function index(): Response
     {
-        return $this->render('recenzent/index.html.twig', [
+        return $this->render('Recenzent/index.html.twig', [
             'controller_name' => 'RecenzentController',
         ]);
     }
