@@ -14,13 +14,13 @@ class PozadavekNaRecenciPrispevku
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'pozadavekNaRecenciPrispevkus')]
+    #[ORM\ManyToOne(inversedBy: 'pozadavekNaRecenciPrispevkusRecenzent')]
     private ?Osoba $Recenzent = null;
 
     #[ORM\ManyToOne(inversedBy: 'pozadavekNaRecenciPrispevkus')]
     private ?Prispevek $Prispevek = null;
 
-    #[ORM\ManyToOne(inversedBy: 'pozadavekNaRecenciPrispevkus')]
+    #[ORM\ManyToOne(inversedBy: 'pozadavekNaRecenciPrispevkusRedaktor')]
     private ?Osoba $Redaktor = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

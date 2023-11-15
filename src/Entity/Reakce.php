@@ -18,10 +18,10 @@ class Reakce
     #[ORM\Column(length: 255)]
     private ?string $Typ = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reakces')]
+    #[ORM\ManyToOne(inversedBy: 'reakcesOdkoho')]
     private ?Osoba $Odkoho = null;
 
-    #[ORM\ManyToOne(inversedBy: 'reakces')]
+    #[ORM\ManyToOne(inversedBy: 'reakcesKomu')]
     private ?Osoba $Komu = null;
 
     #[ORM\Column(length: 255)]

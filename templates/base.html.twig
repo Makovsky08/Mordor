@@ -20,6 +20,31 @@
                 </header>
                 {% block user %}
                 <!-- Přihlášený uživatel -->
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Logged in as {{ app.user.jmeno }}</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRoles" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Roles
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownRoles">
+                            {% for role in app.user.roles %}
+                                <a class="dropdown-item" href="#">{{ role }}</a>
+                            {% endfor %}
+                        </div>
+                        </li>
+
+                        <li>
+                            <a  href="{{ path('app_logout') }}">Logout</a>
+                        </li>
+                    {% else %}
+                        <div>
+                            <a  href="{{ path('app_login') }}">Login</a>
+                        </div>
+                    {% endif %}
+
                 {% endblock %} {% block navbar %}
                 <!-- Odkazy na články, přihlášení, atd. -->
                 {% endblock %}
