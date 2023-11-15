@@ -70,7 +70,7 @@ Encore
         loader: "svg-sprite-loader",
         options: {
           extract: true,
-          spriteFilename: "sprites.[hash]svg",
+          spriteFilename: "sprites.[hash].svg",
         },
       },
     ],
