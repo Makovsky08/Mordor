@@ -46,10 +46,16 @@ class Osoba
     private Collection $prispeveks;
 
     #[ORM\OneToMany(mappedBy: 'Odkoho', targetEntity: Reakce::class)]
-    private Collection $reakces;
+    private Collection $reakcesOdkoho;
+
+    #[ORM\OneToMany(mappedBy: 'Komu', targetEntity: Reakce::class)]
+    private Collection $reakcesKomu;
 
     #[ORM\OneToMany(mappedBy: 'Recenzent', targetEntity: PozadavekNaRecenciPrispevku::class)]
-    private Collection $pozadavekNaRecenciPrispevkus;
+    private Collection $pozadavekNaRecenciPrispevkusRecenzent;
+
+    #[ORM\OneToMany(mappedBy: 'Redaktor', targetEntity: PozadavekNaRecenciPrispevku::class)]
+    private Collection $pozadavekNaRecenciPrispevkusRedaktor;
 
 
 
@@ -57,8 +63,10 @@ class Osoba
     {
         $this->roles = new ArrayCollection();
         $this->prispeveks = new ArrayCollection();
-        $this->reakces = new ArrayCollection();
-        $this->pozadavekNaRecenciPrispevkus = new ArrayCollection();
+        $this->reakcesOdkoho = new ArrayCollection();
+        $this->reakcesKomu = new ArrayCollection();
+        $this->pozadavekNaRecenciPrispevkusRecenzent = new ArrayCollection();
+        $this->pozadavekNaRecenciPrispevkusRedaktor = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -193,24 +201,24 @@ class Osoba
     /**
      * @return Collection<int, Reakce>
      */
-    public function getReakces(): Collection
+    public function getreakcesOdkoho(): Collection
     {
-        return $this->reakces;
+        return $this->reakcesOdkoho;
     }
 
-    public function addReakce(Reakce $reakce): static
+    public function addReakceOdkoho(Reakce $reakce): static
     {
-        if (!$this->reakces->contains($reakce)) {
-            $this->reakces->add($reakce);
+        if (!$this->reakcesOdkoho->contains($reakce)) {
+            $this->reakcesOdkoho->add($reakce);
             $reakce->setOdkoho($this);
         }
 
         return $this;
     }
 
-    public function removeReakce(Reakce $reakce): static
+    public function removeReakceOdkoho(Reakce $reakce): static
     {
-        if ($this->reakces->removeElement($reakce)) {
+        if ($this->reakcesOdkoho->removeElement($reakce)) {
             // set the owning side to null (unless already changed)
             if ($reakce->getOdkoho() === $this) {
                 $reakce->setOdkoho(null);
@@ -220,27 +228,58 @@ class Osoba
         return $this;
     }
 
+
+    /**
+     * @return Collection<int, Reakce>
+     */
+    public function getreakcesKomu(): Collection
+    {
+        return $this->reakcesKomu;
+    }
+
+    public function addReakceKomu(Reakce $reakce): static
+    {
+        if (!$this->reakcesKomu->contains($reakce)) {
+            $this->reakcesKomu->add($reakce);
+            $reakce->setOdkoho($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReakceKomu(Reakce $reakce): static
+    {
+        if ($this->reakcesKomu->removeElement($reakce)) {
+            // set the owning side to null (unless already changed)
+            if ($reakce->getKomu() === $this) {
+                $reakce->setKomu(null);
+            }
+        }
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, PozadavekNaRecenciPrispevku>
      */
-    public function getPozadavekNaRecenciPrispevkus(): Collection
+    public function getpozadavekNaRecenciPrispevkusRecenzent(): Collection
     {
-        return $this->pozadavekNaRecenciPrispevkus;
+        return $this->pozadavekNaRecenciPrispevkusRecenzent;
     }
 
-    public function addPozadavekNaRecenciPrispevku(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    public function addPozadavekNaRecenciPrispevkuRecenzent(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
     {
-        if (!$this->pozadavekNaRecenciPrispevkus->contains($pozadavekNaRecenciPrispevku)) {
-            $this->pozadavekNaRecenciPrispevkus->add($pozadavekNaRecenciPrispevku);
+        if (!$this->pozadavekNaRecenciPrispevkusRecenzent->contains($pozadavekNaRecenciPrispevku)) {
+            $this->pozadavekNaRecenciPrispevkusRecenzent->add($pozadavekNaRecenciPrispevku);
             $pozadavekNaRecenciPrispevku->setRecenzent($this);
         }
 
         return $this;
     }
 
-    public function removePozadavekNaRecenciPrispevku(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    public function removePozadavekNaRecenciPrispevkuRecenzent(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
     {
-        if ($this->pozadavekNaRecenciPrispevkus->removeElement($pozadavekNaRecenciPrispevku)) {
+        if ($this->pozadavekNaRecenciPrispevkusRecenzent->removeElement($pozadavekNaRecenciPrispevku)) {
             // set the owning side to null (unless already changed)
             if ($pozadavekNaRecenciPrispevku->getRecenzent() === $this) {
                 $pozadavekNaRecenciPrispevku->setRecenzent(null);
@@ -250,6 +289,41 @@ class Osoba
         return $this;
     }
 
+
+        /**
+     * @return Collection<int, PozadavekNaRecenciPrispevku>
+     */
+    public function getpozadavekNaRecenciPrispevkusRedaktor(): Collection
+    {
+        return $this->pozadavekNaRecenciPrispevkusRedaktor;
+    }
+
+    public function addPozadavekNaRecenciPrispevkuRedaktor(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    {
+        if (!$this->pozadavekNaRecenciPrispevkusRedaktor->contains($pozadavekNaRecenciPrispevku)) {
+            $this->pozadavekNaRecenciPrispevkusRedaktor->add($pozadavekNaRecenciPrispevku);
+            $pozadavekNaRecenciPrispevku->setRedaktor($this);
+        }
+
+        return $this;
+    }
+
+    public function removePozadavekNaRecenciPrispevkuRedaktor(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    {
+        if ($this->pozadavekNaRecenciPrispevkusRedaktor->removeElement($pozadavekNaRecenciPrispevku)) {
+            // set the owning side to null (unless already changed)
+            if ($pozadavekNaRecenciPrispevku->getRedaktor() === $this) {
+                $pozadavekNaRecenciPrispevku->setRedaktor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getJmeno() . " " . $this->getPrijmeni();
+    }
 
     public function getPassword(): string
     {
@@ -279,6 +353,8 @@ class Osoba
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
 }
 
 

@@ -5,4 +5,4 @@ controllers:
     type: attribute
 home:
     path: '/'
-    controller: App\Controller\OsobaController::index
+    controller: App\Controller\PrispevekController::index
