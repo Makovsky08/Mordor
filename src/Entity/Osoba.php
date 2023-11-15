@@ -320,6 +320,10 @@ class Osoba
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->getJmeno() . " " . $this->getPrijmeni();
+    }
 
     public function getPassword(): string
     {
@@ -349,6 +353,8 @@ class Osoba
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
 }
 
 

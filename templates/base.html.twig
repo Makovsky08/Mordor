@@ -25,11 +25,9 @@
                             <a class="nav-link" href="#">Logged in as {{ app.user.jmeno }}</a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownRoles" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Roles
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownRoles">
+                        <li>
+                        Roles
+                        <div>
                             {% for role in app.user.roles %}
                                 <a class="dropdown-item" href="#">{{ role }}</a>
                             {% endfor %}

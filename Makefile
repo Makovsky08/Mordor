@@ -12,6 +12,9 @@ rebuild:
 entity:
 	docker-compose exec php ./bin/console make:entity
 
+crud:
+	docker-compose exec php ./bin/console make:crud
+
 auth:
 	docker-compose exec php ./bin/console make:auth
 
