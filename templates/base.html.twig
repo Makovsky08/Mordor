@@ -123,7 +123,14 @@
                                 {% else %} {% endif %} {% endblock %} {% block
                                 navbar %} {% include 'navbar.html.twig' %} {%
                                 endblock %} {% if app.user %}
-                                <li class="nav-item">
+                                <li
+                                    class="nav-item d-flex align-items-center gap-2"
+                                >
+                                    <svg width="32" height="32">
+                                        <use
+                                            href="{{ asset('build/sprites.svg') ~ '#logout' }}"
+                                        ></use>
+                                    </svg>
                                     <a
                                         class="nav-link text-light"
                                         href="{{ path('app_logout') }}"
@@ -131,7 +138,14 @@
                                     >
                                 </li>
                                 {% else %}
-                                <li class="nav-item">
+                                <li
+                                    class="nav-item d-flex align-items-center gap-2"
+                                >
+                                    <svg width="32" height="32">
+                                        <use
+                                            href="{{ asset('build/sprites.svg') ~ '#login' }}"
+                                        ></use>
+                                    </svg>
                                     <a
                                         class="nav-link text-light"
                                         href="{{ path('app_login') }}"
