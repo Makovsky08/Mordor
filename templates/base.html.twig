@@ -3,48 +3,170 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{% block title %}Default Title{% endblock %}</title>
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
+        <!-- Google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap"
             rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
         />
+        <!-- Favicons -->
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="{{ asset('favicon/favicon.ico') }}"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="{{ asset('favicon/favicon-32x32.png') }}"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="{{ asset('favicon/favicon-16x16.png') }}"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="{{ asset('favicon/apple-touch-icon.png') }}"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="{{ asset('favicon/android-chrome-192x192.png') }}"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="512x512"
+            href="{{ asset('favicon/android-chrome-512x512.png') }}"
+        />
+        <link rel="manifest" href="{{ asset('favicon/site.webmanifest') }}" />
+        <title>{% block title %}Default Title{% endblock %}</title>
+        {% block stylesheets %}
+        {{
+            encore_entry_link_tags("app_css")
+        }}
+        {% endblock %}
     </head>
     <body>
-        <div class="container__main">
-            <aside>
-                <header>
-                    <h1 class="heading">
-                        <strong>Mordor</strong><span>Časopis VŠPJ</span>
-                    </h1>
-                </header>
-                {% block user %}
-                <!-- Přihlášený uživatel -->
-                {% endblock %} {% block navbar %}
-                <!-- Odkazy na články, přihlášení, atd. -->
-                {% endblock %}
-            </aside>
-            <div class="wrapper">
-                <div class="statement">
-                    <p>
-                        Tato aplikace je výsledkem školního projektu v kurzu
-                        Řízení SW projektů na Vysoké škole polytechnické
-                        Jihlava.
-                        <br />
-                        Nejedná se o stránky skutečného odborného časopisu!
-                    </p>
-                </div>
-                <main>
-                    {% block content %}
-                    <!-- Jedinečný obsah pro každou stránku -->
-                    {% endblock %}
-                </main>
-                <footer class="footer">
-                    <div class="footer__left">Mordor</div>
-                    <div class="footer__right">
-                        &copy; 2023 | All rights reserved.
+        <div class="container wrapper bg-white rounded-5">
+            <div class="wrapper__main">
+                <aside class="wrapper__aside bg-secondary">
+                    <header class="pb-2">
+                        <h1 class="heading lh-08">
+                            <strong class="d-block fs-2">Mordor</strong
+                            ><span class="fs-6 fw-normal">Časopis VŠPJ</span>
+                        </h1>
+                    </header>
+                    <nav class="navbar navbar-expand-lg d-block">
+                        <div
+                            class="collapse navbar-collapse"
+                            id="navbarNavDropdown"
+                        >
+                            <ul class="navbar-nav flex-column gap-3">
+                                {% block user %}
+                                <!-- Přihlášený uživatel -->
+                                {% if app.user %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" href="#"
+                                        >Přihlášen jako {{ app.user.jmeno }}</a
+                                    >
+                                </li>
+
+                                <!-- Blok pro role uživatele -->
+                                <li class="nav-item">
+                                    Roles
+                                    <div>
+                                        {% for role in app.user.roles %} {% if
+                                        role == 'ROLE_ADMIN' %}
+                                        <a
+                                            class="dropdown-item"
+                                            href="/admin"
+                                            >{{ role }}</a
+                                        >
+                                        {% elseif role == 'ROLE_AUTOR' %}
+                                        <a
+                                            class="dropdown-item"
+                                            href="/autor"
+                                            >{{ role }}</a
+                                        >
+                                        {% elseif role == 'ROLE_RECENZENT' %}
+                                        <a
+                                            class="dropdown-item"
+                                            href="/recenzent"
+                                            >{{ role }}</a
+                                        >
+                                        {% elseif role == 'ROLE_REDAKTOR' %}
+                                        <a
+                                            class="dropdown-item"
+                                            href="/redaktor"
+                                            >{{ role }}</a
+                                        >
+                                        {% elseif role == 'ROLE_SEFREDAKTOR' %}
+                                        <a
+                                            class="dropdown-item"
+                                            href="/sefredaktor"
+                                            >{{ role }}</a
+                                        >
+                                        {% else %}
+                                        <a class="dropdown-item" href="#">{{
+                                            role
+                                        }}</a>
+                                        {% endif %} {% endfor %}
+                                    </div>
+                                </li>
+                                {% else %} {% endif %} {% endblock %} {% block
+                                navbar %} {% include 'navbar.html.twig' %} {%
+                                endblock %} {% if app.user %}
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link text-light"
+                                        href="{{ path('app_logout') }}"
+                                        >Logout</a
+                                    >
+                                </li>
+                                {% else %}
+                                <li class="nav-item">
+                                    <a
+                                        class="nav-link text-light"
+                                        href="{{ path('app_login') }}"
+                                        >Login</a
+                                    >
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+                <div class="wrapper__content">
+                    <div class="statement pb-4">
+                        <p class="statement__info fs-14">
+                            Tato aplikace je výsledkem školního projektu v kurzu
+                            Řízení SW projektů na Vysoké škole polytechnické
+                            Jihlava.
+                            <br />
+                            Nejedná se o stránky skutečného odborného časopisu!
+                        </p>
                     </div>
-                </footer>
+                    <main>
+                        {% block content %}
+                        <!-- Jedinečný obsah pro každou stránku -->
+                        {% endblock %}
+                    </main>
+                    <footer
+                        class="footer d-flex justify-content-between pt-4 fw-bold"
+                    >
+                        <div class="footer__left">Mordor</div>
+                        <div class="footer__right">
+                            &copy; 2023 | All rights reserved.
+                        </div>
+                    </footer>
+                </div>
             </div>
         </div>
     </body>
