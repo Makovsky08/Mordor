@@ -29,21 +29,7 @@ Mordor app for RSP project.
 
 1. Run `docker compose exec php ./bin/console doctrine:migrations:migrate` to run migrations.
 2. Run `docker compose exec php ./bin/console doctrine:migrations:diff` to generate migrations.
-3. Run `docker exec php ./bin/console doctrine:fixtures:load --append` to load fixtures.
-
-## Setting up Webpack for Symfony 6
-
-To utilize Webpack for asset compilation in Symfony 6, ensure that you have the following prerequisites:
-
-1. Ensure PHP version 8 or higher is installed on your system.
-
-2. Node.js must be installed to work with npm. You can download it from [the official Node.js website](https://nodejs.org/).
-
-3. After cloning the repository, navigate to the project directory and run `npm install` to install the required node modules.
-
-4. Use the `npm run watch` command to start Webpack in watch mode. This will automatically build your SCSS files into clean CSS and compile your JavaScript files whenever a change is detected. This is particularly useful during development as it saves time by not needing to manually run the build process after each change.
-
-5. When Webpack processes your asset files, the compiled CSS will be placed in the `public/build` directory. Ensure that this directory is correctly referenced in your templates for your stylesheets.
+3. Run `docker compose exec php ./bin/console doctrine:fixtures:load --append` to load fixtures.
 
 ## Docs
 
