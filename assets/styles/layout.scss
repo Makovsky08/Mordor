@@ -1,0 +1,43 @@
+body {
+    background-color: $body;
+    font-size: 1rem;
+}
+
+::selection {
+    background-color: $primary;
+    color: #fff;
+}
+
+.wrapper {
+    margin: 6rem auto;
+    padding: 0;
+}
+
+.wrapper__main {
+    position: relative;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 10px;
+    border-radius: 2rem;
+    box-shadow: 0 40px 30px rgba(#383896, 0.15);
+    &::after {
+        content: "";
+        position: absolute;
+        top: -3rem;
+        bottom: -3rem;
+        left: -3rem;
+        width: 260px;
+        background-color: $primary;
+        border-radius: 1.5rem;
+        z-index: -1;
+    }
+}
+
+.wrapper__aside {
+    padding: 3rem 2.5rem;
+    border-radius: 2rem 0 0 2rem;
+}
+
+.wrapper__content {
+    padding: 1.2rem 3rem;
+}

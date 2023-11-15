@@ -1,0 +1,11 @@
+.nav-link {
+    padding: 0 !important;
+    margin: 0;
+    &:hover,
+    &:focus {
+        color: $dark;
+        // font-weight: 700;
+        text-shadow: 0 0 1px $dark;
+        transition: all 0.2s ease-out;
+    }
+}
