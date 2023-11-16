@@ -66,16 +66,14 @@ services:
       - database  # Ensure the database container starts before pgAdmin
       
   node:
-    image: node:latest  # Or use the same image as your PHP service
     build:
-      context: . 
+      context: .
       dockerfile: DockernpmFile
-    working_dir: /app  # Set the working directory
+    working_dir: /app
     volumes:
-      - .:/app  # Mount the application code
-    command: npm run watch  # Run npm watch
+      - .:/app
     depends_on:
-      - php  # Ensure that the PHP service is started first
+      - php
 
 volumes:
   caddy_data:
