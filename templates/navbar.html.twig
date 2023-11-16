@@ -1,6 +1,9 @@
 <!-- navbar.html.twig -->
 {% block navbar %}
-<li class="nav-item">
+<li class="nav-item d-flex align-items-center gap-2">
+    <svg width="32" height="32">
+        <use href="{{ asset('build/sprites.svg') ~ '#about' }}"></use>
+    </svg>
     <a class="nav-link" href="{{ path('app_home') }}">O časopisu</a>
 </li>
 <!-- Zde přidáte další navigační odkazy -->
