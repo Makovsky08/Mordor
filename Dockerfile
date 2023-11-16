@@ -45,7 +45,9 @@ RUN npm install --global yarn
 COPY --link composer.* symfony.* package.json yarn.lock /public ./
 RUN npm install
 RUN yarn install
-###< recipes ###
+
+
+
 
 
 COPY --link frankenphp/conf.d/app.ini $PHP_INI_DIR/conf.d/
@@ -62,6 +64,22 @@ COPY --from=composer_upstream --link /composer /usr/bin/composer
 
 HEALTHCHECK --start-period=60s CMD curl -f http://localhost:2019/metrics || exit 1
 CMD [ "frankenphp", "run", "--config", "/etc/caddy/Caddyfile" ]
+
+
+# Use a Node.js base image
+FROM node:latest as node_base
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json (or yarn.lock)
+COPY package.json package-lock.json ./
+
+RUN npm install --global yarn
+
+# Install dependencies
+RUN npm install
+RUN yarn install
 
 # Dev FrankenPHP image
 FROM frankenphp_base AS frankenphp_dev
