@@ -41,7 +41,8 @@ RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
 ###< doctrine/doctrine-bundle ###
 RUN apk add --no-cache nodejs npm
 RUN npm install --global yarn
-COPY --link package.json yarn.lock ./
+
+COPY --link composer.* symfony.* package.json yarn.lock /public ./
 RUN npm install
 RUN yarn install
 ###< recipes ###
@@ -75,7 +76,7 @@ RUN set -eux; \
 		xdebug \
 	;
 
-COPY --link package.json yarn.lock ./
+COPY --link composer.* symfony.* package.json yarn.lock ./
 RUN npm install
 RUN yarn install
 
@@ -99,12 +100,12 @@ COPY --link composer.* symfony.* ./
 RUN set -eux; \
 	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
 
-COPY --link package.json yarn.lock ./
-RUN npm install
-RUN yarn install
 
 # copy sources
 COPY --link . ./
+RUN npm install
+RUN yarn install
+
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \

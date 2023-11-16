@@ -27,7 +27,18 @@ class OsobaFixture extends Fixture implements DependentFixtureInterface
             $user->setJmeno("User$i");
             $user->setPrijmeni("Prijmeni$i");
             $user->setDatumNarozeni(new \DateTime());
-            $user->addRole($this->getReference(RoleFixture::ROLES[array_rand(RoleFixture::ROLES)]));
+            
+
+            if($i == 1){
+                $user->addRole($this->getReference(RoleFixture::ROLES[1]));
+                $user->addRole($this->getReference(RoleFixture::ROLES[2]));
+                $user->addRole($this->getReference(RoleFixture::ROLES[3]));
+                $user->addRole($this->getReference(RoleFixture::ROLES[4]));
+                $user->addRole($this->getReference(RoleFixture::ROLES[5]));
+            }
+            else {
+                $user->addRole($this->getReference(RoleFixture::ROLES[array_rand(RoleFixture::ROLES)]));
+            }
             // Set other properties like username, etc.
             // ...
 
