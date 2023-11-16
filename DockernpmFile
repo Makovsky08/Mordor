@@ -1,0 +1,14 @@
+# Use a Node.js base image
+FROM node:latest as node_base
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json (or yarn.lock)
+COPY package.json package-lock.json ./
+
+RUN npm install --global yarn
+
+# Install dependencies
+RUN npm install
+RUN yarn install

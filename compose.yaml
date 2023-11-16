@@ -67,6 +67,9 @@ services:
       
   node:
     image: node:latest  # Or use the same image as your PHP service
+    build:
+      context: . 
+      dockerfile: DockernpmFile
     working_dir: /app  # Set the working directory
     volumes:
       - .:/app  # Mount the application code
