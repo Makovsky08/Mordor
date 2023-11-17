@@ -84,15 +84,11 @@
                                     <div>
                                         {% for role in app.user.roles %} {% if
                                         role == 'ROLE_ADMIN' %}
-                                        <a
-                                            class="dropdown-item"
-                                            href="/admin"
+                                        <a class="dropdown-item" href="/admin"
                                             >Dashboard Admina</a
                                         >
                                         {% elseif role == 'ROLE_AUTOR' %}
-                                        <a
-                                            class="dropdown-item"
-                                            href="/autor"
+                                        <a class="dropdown-item" href="/autor"
                                             >Dashboard Autora</a
                                         >
                                         {% elseif role == 'ROLE_RECENZENT' %}
@@ -149,7 +145,21 @@
                                     <a
                                         class="nav-link text-light"
                                         href="{{ path('app_login') }}"
-                                        >Login</a
+                                        >Přihlásit se</a
+                                    >
+                                </li>
+                                <li
+                                    class="nav-item d-flex align-items-center gap-2"
+                                >
+                                    <svg width="32" height="32">
+                                        <use
+                                            href="{{ asset('build/sprites.svg') ~ '#add-user' }}"
+                                        ></use>
+                                    </svg>
+                                    <a
+                                        class="nav-link text-light"
+                                        href="{{ path('app_register') }}"
+                                        >Registrace</a
                                     >
                                 </li>
                                 {% endif %}
