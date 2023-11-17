@@ -22,3 +22,9 @@
         color: $primary;
     }
 }
+
+a {
+    &:hover {
+        text-decoration: none;
+    }
+}
