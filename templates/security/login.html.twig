@@ -68,8 +68,9 @@
     </button>
 
     <!-- Registration Button -->
-    <a href="{{ path('app_register') }}" class="btn btn-lg btn-secondary">
-        Registrace
-    </a>
+    <div class="py-3">
+        Nemáte ještě účet?
+        <a href="{{ path('app_register') }}"> Vytvořte si ho </a>
+    </div>
 </form>
 {% endblock %}
