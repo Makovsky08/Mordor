@@ -29,7 +29,7 @@ class OsobaFixture extends Fixture implements DependentFixtureInterface
             $user->setDatumNarozeni(new \DateTime());
             
 
-            if($i == 1){
+            if($i == 1) {
                 $user->addRole($this->getReference(RoleFixture::ROLES[1]));
                 $user->addRole($this->getReference(RoleFixture::ROLES[2]));
                 $user->addRole($this->getReference(RoleFixture::ROLES[3]));

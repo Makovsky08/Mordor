@@ -65,7 +65,7 @@ class OsobaController extends AbstractController
             return $this->redirectToRoute('app_osoba_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('osoba/new.html.twig', [
+        return $this->render('Osoba/new.html.twig', [
             'osoba' => $osoba,
             'form' => $form,
         ]);
@@ -74,7 +74,7 @@ class OsobaController extends AbstractController
     #[Route('/{id}', name: 'app_osoba_show', methods: ['GET'])]
     public function show(Osoba $osoba): Response
     {
-        return $this->render('osoba/show.html.twig', [
+        return $this->render('Osoba/show.html.twig', [
             'osoba' => $osoba,
         ]);
     }
@@ -94,7 +94,7 @@ class OsobaController extends AbstractController
             return $this->redirectToRoute('app_osoba_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('osoba/edit.html.twig', [
+        return $this->render('Osoba/edit.html.twig', [
             'osoba' => $osoba,
             'form' => $form,
         ]);

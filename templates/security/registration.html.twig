@@ -1,0 +1,58 @@
+{# templates/registration/register.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+{{ form_start(registrationForm, {'attr': {'class': 'mt-3'}}) }}
+
+    <h1 class="h3 mb-3 font-weight-normal">Registrace</h1>
+
+    <div class="form-group mb-4">
+        {{ form_label(registrationForm.jmeno) }}
+        {{ form_widget(registrationForm.jmeno, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(registrationForm.jmeno) }}
+    </div>
+
+    <div class="form-group mb-4">
+        {{ form_label(registrationForm.prijmeni) }}
+        {{ form_widget(registrationForm.prijmeni, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(registrationForm.prijmeni) }}
+    </div>
+
+    <div class="form-group mb-4">
+        {{ form_label(registrationForm.datum_narozeni) }}
+        {{ form_widget(registrationForm.datum_narozeni, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(registrationForm.datum_narozeni) }}
+    </div>
+
+    <div class="form-group mb-4">
+        {{ form_label(registrationForm.email) }}
+        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(registrationForm.email) }}
+    </div>
+
+    <div class="form-group mb-4">
+        {{ form_label(registrationForm.heslo.first) }}
+        {{ form_widget(registrationForm.heslo.first, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(registrationForm.heslo.first) }}
+    </div>
+
+    <div class="form-group mb-4">
+        {{ form_label(registrationForm.heslo.second) }}
+        {{ form_widget(registrationForm.heslo.second, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(registrationForm.heslo.second) }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{ 'Register'|trans }}</button>
+
+    <!-- Optional: Link to Log in if you have one -->
+    <a href="{{ path('app_login') }}" class="btn btn-secondary mt-2">
+        {{ 'Log in'|trans }}
+    </a>
+
+{{ form_end(registrationForm) }}
+{% endblock %}
+
+
