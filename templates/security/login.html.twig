@@ -1,33 +1,70 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Log in!{% endblock %}
-
-
-
-{% block content %}
+{% extends 'base.html.twig' %} {% block title %}Přihlášení - Mordor{% endblock
+%} {% block content %}
 <form method="post">
     {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="alert alert-danger">
+        {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+    {% endif %} {% if app.user %}
+    <div class="mb-3">
+        You are logged in as {{ app.user.userIdentifier }},
+        <a href="{{ path('app_logout') }}">Odhlásit se</a>
+    </div>
     {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    <h2>Přihlášení</h2>
+    <div class="form-sign py-4">
+        <div class="form-field pb-3">
+            <input
+                type="email"
+                value="{{ last_username }}"
+                name="email"
+                id="inputEmail"
+                class="form-control"
+                autocomplete="email"
+                placeholder="E-mail"
+                required
+                autofocus
+            />
         </div>
-    {% endif %}
+        <div class="form-field position-relative">
+            <input
+                type="password"
+                name="password"
+                id="inputPassword"
+                class="form-control"
+                autocomplete="current-password"
+                placeholder="Password"
+                required
+            />
+            <span id="togglePassword" class="password-toggle">
+                <svg id="passwordIcon" width="24" height="24">
+                    <use
+                        href="{{ asset('build/sprites.svg') ~ '#password' }}"
+                    ></use>
+                </svg>
+                <svg
+                    id="passwordShowIcon"
+                    width="24"
+                    height="24"
+                    style="display: none"
+                >
+                    <use
+                        href="{{ asset('build/sprites.svg') ~ '#password-show' }}"
+                    ></use>
+                </svg>
+            </span>
+        </div>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        <input
+            type="hidden"
+            name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        />
+    </div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+    <button class="btn btn-lg btn-primary fs-6" type="submit">
+        Přihásit se
     </button>
 </form>
 {% endblock %}
