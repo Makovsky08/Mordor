@@ -6,9 +6,9 @@
     <div class="container mt-4 edit-container">
         <h1>Edit Osoba</h1>
 
-        {{ include('osoba/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('osoba/_form.html.twig', {'button_label': 'Změnit'}) }}
 
-        <a class="btn btn-secondary mt-2" href="{{ path('app_osoba_index') }}">Back to List</a>
+        <a class="btn btn-secondary mt-2" href="{{ path('app_admin') }}">Zpět na Dashboard</a>
 
         {{ include('osoba/_delete_form.html.twig') }}
     </div>
