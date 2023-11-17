@@ -33,7 +33,7 @@
                     <a class="btn btn-info btn-sm" href="{{ path('app_osoba_show', {'id': osoba.id}) }}">Show</a>
                     {% if is_granted('ROLE_ADMIN') %}
                         <a class="btn btn-warning btn-sm" href="{{ path('app_osoba_edit', {'id': osoba.id}) }}">Edit</a>
-                        {{ include('osoba/_delete_form_inline.html.twig') }}
+                        {{ include('Osoba/_delete_form_inline.html.twig') }}
                     {% endif %}
                 </td>
             </tr>
