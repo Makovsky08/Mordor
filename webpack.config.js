@@ -1,6 +1,7 @@
 const Encore = require("@symfony/webpack-encore");
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
 const path = require("path");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -83,6 +84,8 @@ Encore
   //     pattern: /\.svg$/,
   //   })
 
+  // add plugins
+  .addPlugin(new CleanWebpackPlugin())
   .addPlugin(new SpriteLoaderPlugin({ plainSprite: true }));
 
 // uncomment if you use TypeScript
