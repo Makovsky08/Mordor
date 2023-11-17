@@ -13,3 +13,11 @@ import "./icons/articles.svg";
 import "./icons/helpdesk.svg";
 import "./icons/login.svg";
 import "./icons/logout.svg";
+import "./icons/password.svg";
+import "./icons/password-show.svg";
+
+import initializeTogglePassword from "./js/toggle-password";
+
+document.addEventListener("DOMContentLoaded", () => {
+  initializeTogglePassword();
+});
