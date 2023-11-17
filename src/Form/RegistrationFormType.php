@@ -21,13 +21,13 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('jmeno', TextType::class, [
                 // customize the options as needed
-                'label' => 'Name'
+                'label' => 'Jméno'
             ])
             ->add('prijmeni', TextType::class, [
-                'label' => 'Surname'
+                'label' => 'Příjmení'
             ])
             ->add('datum_narozeni', DateType::class, [
-                'label' => 'Datum Narozeni',
+                'label' => 'Datum narození',
                 'widget' => 'single_text',
                 'input' => 'datetime',
                 'format' => 'yyyy-MM-dd',
@@ -35,11 +35,11 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class)
             ->add('heslo', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'invalid_message' => 'Hesla se musí rovnat.',
+                'invalid_message' => 'Hesla se neshodují.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => ['label' => 'Heslo'],
-                'second_options' => ['label' => 'Potvrzeni hesla'],
+                'second_options' => ['label' => 'Potvrzení hesla'],
             ]);
     }
 
