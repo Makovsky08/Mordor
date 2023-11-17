@@ -40,12 +40,7 @@ RUN apk add --no-cache --virtual .pgsql-deps postgresql-dev; \
 	apk del .pgsql-deps
 ###< doctrine/doctrine-bundle ###
 RUN apk add --no-cache nodejs npm
-RUN npm install --global yarn
-COPY --link package.json yarn.lock ./
-RUN npm install
-RUN yarn install
-###< recipes ###
-
+	
 
 COPY --link frankenphp/conf.d/app.ini $PHP_INI_DIR/conf.d/
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
@@ -75,9 +70,7 @@ RUN set -eux; \
 		xdebug \
 	;
 
-COPY --link package.json yarn.lock ./
-RUN npm install
-RUN yarn install
+COPY --link composer.* symfony.* package.json yarn.lock ./
 
 COPY --link frankenphp/conf.d/app.dev.ini $PHP_INI_DIR/conf.d/
 
@@ -99,12 +92,10 @@ COPY --link composer.* symfony.* ./
 RUN set -eux; \
 	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
 
-COPY --link package.json yarn.lock ./
-RUN npm install
-RUN yarn install
 
 # copy sources
 COPY --link . ./
+
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \

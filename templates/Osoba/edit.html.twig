@@ -6,10 +6,10 @@
     <div class="container mt-4 edit-container">
         <h1>Edit Osoba</h1>
 
-        {{ include('osoba/_form.html.twig', {'button_label': 'Změnit'}) }}
+        {{ include('Osoba/_form.html.twig', {'button_label': 'Update'}) }}
 
         <a class="btn btn-secondary mt-2" href="{{ path('app_admin') }}">Zpět na Dashboard</a>
 
-        {{ include('osoba/_delete_form.html.twig') }}
+        {{ include('Osoba/_delete_form.html.twig') }}
     </div>
 {% endblock %}

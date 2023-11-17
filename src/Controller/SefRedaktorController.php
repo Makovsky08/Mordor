@@ -11,7 +11,7 @@ class SefRedaktorController extends AbstractController
     #[Route('/sefredaktor', name: 'app_sef_redaktor')]
     public function index(): Response
     {
-        return $this->render('Sef_redaktor/index.html.twig', [
+        return $this->render('sef_redaktor/index.html.twig', [
             'controller_name' => 'SefRedaktorController',
         ]);
     }

@@ -1,0 +1,17 @@
+# Use the official Node.js image
+FROM node:latest
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the entrypoint script into the container
+COPY frankenphp/node-entrypoint.sh /usr/local/bin/
+
+# Make the entrypoint script executable
+RUN chmod +x /usr/local/bin/node-entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["node-entrypoint.sh"]
+
+# The command to run on container start
+CMD ["npm", "run", "watch"]
