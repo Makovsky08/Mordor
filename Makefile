@@ -10,8 +10,8 @@ rebuild:
 	docker-compose up -d --build
 
 npm:
-	docker-compose exec node npm install
-	docker-compose exec node npm run watch
+	docker-compose exec php npm install
+	docker-compose exec php npm run watch
 
 entity:
 	docker-compose exec php ./bin/console make:entity
