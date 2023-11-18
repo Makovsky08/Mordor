@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StatusPrispevkuRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,6 +26,39 @@ class StatusPrispevku
     #[ORM\ManyToOne(inversedBy: 'Status_Prispevku')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Status $status = null;
+
+    #[ORM\ManyToMany(targetEntity: Reakce::class, inversedBy: 'statusPrispevkus')]
+    private $reakces;
+
+    public function __construct()
+    {
+        $this->reakces = new ArrayCollection();
+    }
+
+    public function getReakces(): Collection
+    {
+        return $this->reakces;
+    }
+
+    public function addReakce(Reakce $reakce): static
+    {
+        if (!$this->reakces->contains($reakce)) {
+            $this->reakces->add($reakce);
+            $reakce->addStatusPrispevku($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReakce(Reakce $reakce): static
+    {
+        if ($this->reakces->contains($reakce)) {
+            $this->reakces->removeElement($reakce);
+            $reakce->removeStatusPrispevku($this);
+        }
+
+        return $this;
+    }
 
     public function getId(): ?int
     {

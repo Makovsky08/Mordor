@@ -33,6 +33,9 @@ class Reakce
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'reakces')]
     private ?self $Odpoved_na = null;
 
+    #[ORM\ManyToMany(targetEntity: StatusPrispevku::class, mappedBy: 'reakces')]
+    private Collection $statusPrispevkus;
+
     #[ORM\OneToMany(mappedBy: 'Odpoved_na', targetEntity: self::class)]
     private Collection $reakces;
 
@@ -42,6 +45,31 @@ class Reakce
     public function __construct()
     {
         $this->reakces = new ArrayCollection();
+        $this->statusPrispevkus = new ArrayCollection();
+    }
+
+    public function getStatusPrispevkus(): Collection
+    {
+        return $this->statusPrispevkus;
+    }
+
+    public function addStatusPrispevku(StatusPrispevku $statusPrispevku): static
+    {
+        if (!$this->statusPrispevkus->contains($statusPrispevku)) {
+            $this->statusPrispevkus->add($statusPrispevku);
+            $statusPrispevku->addReakce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatusPrispevku(StatusPrispevku $statusPrispevku): static
+    {
+        if ($this->statusPrispevkus->removeElement($statusPrispevku)) {
+            $statusPrispevku->removeReakce($this);
+        }
+
+        return $this;
     }
 
     public function getId(): ?int
