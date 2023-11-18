@@ -30,11 +30,11 @@ class OsobaFixture extends Fixture implements DependentFixtureInterface
             
 
             if($i == 1) {
+                $user->addRole($this->getReference(RoleFixture::ROLES[0]));
                 $user->addRole($this->getReference(RoleFixture::ROLES[1]));
                 $user->addRole($this->getReference(RoleFixture::ROLES[2]));
                 $user->addRole($this->getReference(RoleFixture::ROLES[3]));
                 $user->addRole($this->getReference(RoleFixture::ROLES[4]));
-                $user->addRole($this->getReference(RoleFixture::ROLES[5]));
             }
             else {
                 $user->addRole($this->getReference(RoleFixture::ROLES[array_rand(RoleFixture::ROLES)]));

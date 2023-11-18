@@ -21,7 +21,8 @@ class Status
     #[ORM\Column(length: 255)]
     private ?string $Popis = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(targetEntity: Role::class, inversedBy: 'roles')]
+    #[ORM\JoinColumn(nullable:false)]
     private ?Role $Zodpovedna_role = null;
 
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: StatusPrispevku::class)]
@@ -30,6 +31,18 @@ class Status
     public function __construct()
     {
         $this->Status_Prispevku = new ArrayCollection();
+    }
+
+    public function getZodpovedna_role(): ?Role
+    {
+        return $this->Zodpovedna_role;
+    }
+
+    public function setZodpovedna_role(?Role $Zodpovedna_role): self
+    {
+        $this->Zodpovedna_role = $Zodpovedna_role;
+
+        return $this;
     }
 
     public function getId(): ?int

@@ -21,9 +21,37 @@ class Role
     #[ORM\ManyToMany(targetEntity: Osoba::class, mappedBy: 'roles')]
     private Collection $osobas;
 
+    #[ORM\OneToMany(targetEntity: Status::class, mappedBy: 'ZodpovednaRole')]
+    private $statuses;
+
     public function __construct()
     {
         $this->osobas = new ArrayCollection();
+        $this->statuses = new ArrayCollection();
+    }
+
+    public function getStatuses(): Collection
+    {
+        return $this->statuses;
+    }
+
+    public function addStatus(Status $status): static
+    {
+        if (!$this->statuses->contains($status)) {
+            $this->statuses->add($status);
+            $status->setZodpovednaRole($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatus(Status $status): static
+    {
+        if ($this->statuses->removeElement($status)) {
+            $status->setZodpovednaRole(null);
+        }
+
+        return $this;
     }
 
     public function getId(): ?int
