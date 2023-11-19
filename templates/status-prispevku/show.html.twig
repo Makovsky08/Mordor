@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Status rispevek{% endblock %}
+
+{% block content %}
+    <h1>Status Prispevku</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ statusPrispevku.id }}</td>
+            </tr>
+            <tr>
+                <th>Prispevek</th>
+                <td>{{ statusPrispevku.prispevek.id }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <th>{{ statusPrispevku.status.nazev }}</th>
+            </tr>
+            <tr>
+                <th>Datum zmeny</th>
+                <td>{{ statusPrispevku.datumZmeny ? statusPrispevku.datumZmeny|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_status_prispevku_index') }}">back to list</a>
+
+    <a href="{{ path('app_status_prispevku_edit', {'id': statusPrispevku.id}) }}">edit</a>
+{% endblock %}
