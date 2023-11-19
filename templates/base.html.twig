@@ -120,7 +120,7 @@
                                 navbar %} {% include 'navbar.html.twig' %} {%
                                 endblock %} {% if app.user %}
                                 <li
-                                    class="nav-item d-flex align-items-center gap-2"
+                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_register' ? 'active' : '' }}"
                                 >
                                     <svg width="32" height="32">
                                         <use
@@ -130,12 +130,12 @@
                                     <a
                                         class="nav-link text-light"
                                         href="{{ path('app_logout') }}"
-                                        >Logout</a
+                                        >Odhlásit se</a
                                     >
                                 </li>
                                 {% else %}
                                 <li
-                                    class="nav-item d-flex align-items-center gap-2"
+                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_register' ? 'active' : '' }}"
                                 >
                                     <svg width="32" height="32">
                                         <use
@@ -149,7 +149,7 @@
                                     >
                                 </li>
                                 <li
-                                    class="nav-item d-flex align-items-center gap-2"
+                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_register' ? 'active' : '' }}"
                                 >
                                     <svg width="32" height="32">
                                         <use
