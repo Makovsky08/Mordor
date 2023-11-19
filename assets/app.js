@@ -9,6 +9,7 @@
 import "./styles/app.scss";
 import "./icons/about.svg";
 import "./icons/add.svg";
+import "./icons/add-user.svg";
 import "./icons/articles.svg";
 import "./icons/helpdesk.svg";
 import "./icons/login.svg";
