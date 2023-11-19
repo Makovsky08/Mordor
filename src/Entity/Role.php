@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -16,17 +17,17 @@ class Role
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $jmeno_role = null;
+    private ?string $role_title = null;
 
-    #[ORM\ManyToMany(targetEntity: Osoba::class, mappedBy: 'roles')]
-    private Collection $osobas;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'roles')]
+    private Collection $users;
 
     #[ORM\OneToMany(targetEntity: Status::class, mappedBy: 'ZodpovednaRole')]
     private $statuses;
 
     public function __construct()
     {
-        $this->osobas = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->statuses = new ArrayCollection();
     }
 
@@ -59,40 +60,40 @@ class Role
         return $this->id;
     }
 
-    public function getJmenoRole(): ?string
+    public function getRoleTitle(): ?string
     {
-        return $this->jmeno_role;
+        return $this->role_title;
     }
 
-    public function setJmenoRole(string $jmeno_role): static
+    public function setRoleTitle(string $role_title): static
     {
-        $this->jmeno_role = $jmeno_role;
+        $this->role_title = $role_title;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Osoba>
+     * @return Collection<int, User>
      */
-    public function getOsobas(): Collection
+    public function getUsers(): Collection
     {
-        return $this->osobas;
+        return $this->users;
     }
 
-    public function addOsoba(Osoba $osoba): static
+    public function addUser(User $user): static
     {
-        if (!$this->osobas->contains($osoba)) {
-            $this->osobas->add($osoba);
-            $osoba->addRole($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addRole($this);
         }
 
         return $this;
     }
 
-    public function removeOsoba(Osoba $osoba): static
+    public function removeUser(User $user): static
     {
-        if ($this->osobas->removeElement($osoba)) {
-            $osoba->removeRole($this);
+        if ($this->users->removeElement($user)) {
+            $user->removeRole($this);
         }
 
         return $this;
@@ -100,6 +101,6 @@ class Role
 
     public function __toString()
     {
-        return $this->getJmenoRole(); 
+        return $this->getRoleTitle();
     }
 }

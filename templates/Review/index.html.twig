@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seznam recenzí{% endblock %}
+
+{% block content %}
+    <h1>Recenze</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>datum recenze</th>
+            <th>recenzent</th>
+            <th>text</th>
+            <th>aktualnost</th>
+            <th>originalita</th>
+            <th>odborná úroveň</th>
+            <th>stylistická úroveň</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for review in reviews %}
+            <tr>
+                <td>{{ review.id }}</td>
+                <td>{{ review.createdAt }}</td>
+                <td>{{ review.reviewer }}</td>
+                <td>{{ review.text }}</td>
+                <td>{{ review.topicality }}</td>
+                <td>{{ review.originality }}</td>
+                <td>{{ review.expertiseLevel }}</td>
+                <td>{{ review.stylisticsLevel }}</td>
+                <td>
+                    <a href="{{ path('app_review_show', {'id': review.id}) }}">show</a>
+                    <a href="{{ path('app_review_edit', {'id': review.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_review_new') }}">Create new</a>
+{% endblock %}

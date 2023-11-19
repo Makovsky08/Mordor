@@ -19,16 +19,16 @@ class Reakce
     private ?string $Typ = null;
 
     #[ORM\ManyToOne(inversedBy: 'reakcesOdkoho')]
-    private ?Osoba $Odkoho = null;
+    private ?User $Odkoho = null;
 
     #[ORM\ManyToOne(inversedBy: 'reakcesKomu')]
-    private ?Osoba $Komu = null;
+    private ?User $Komu = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Text = null;
 
     #[ORM\ManyToOne(inversedBy: 'reakces')]
-    private ?Prispevek $Odkazovany_prispevek = null;
+    private ?Post $Odkazovany_prispevek = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'reakces')]
     private ?self $Odpoved_na = null;
@@ -40,7 +40,7 @@ class Reakce
     private Collection $reakces;
 
     #[ORM\ManyToOne(inversedBy: 'Reakce')]
-    private ?Recenze $recenze = null;
+    private ?Review $recenze = null;
 
     public function __construct()
     {
@@ -89,24 +89,24 @@ class Reakce
         return $this;
     }
 
-    public function getOdkoho(): ?Osoba
+    public function getOdkoho(): ?User
     {
         return $this->Odkoho;
     }
 
-    public function setOdkoho(?Osoba $Odkoho): static
+    public function setOdkoho(?User $Odkoho): static
     {
         $this->Odkoho = $Odkoho;
 
         return $this;
     }
 
-    public function getKomu(): ?Osoba
+    public function getKomu(): ?User
     {
         return $this->Komu;
     }
 
-    public function setKomu(?Osoba $Komu): static
+    public function setKomu(?User $Komu): static
     {
         $this->Komu = $Komu;
 
@@ -125,12 +125,12 @@ class Reakce
         return $this;
     }
 
-    public function getOdkazovanyPrispevek(): ?Prispevek
+    public function getOdkazovanyPrispevek(): ?Post
     {
         return $this->Odkazovany_prispevek;
     }
 
-    public function setOdkazovanyPrispevek(?Prispevek $Odkazovany_prispevek): static
+    public function setOdkazovanyPrispevek(?Post $Odkazovany_prispevek): static
     {
         $this->Odkazovany_prispevek = $Odkazovany_prispevek;
 
@@ -179,12 +179,12 @@ class Reakce
         return $this;
     }
 
-    public function getRecenze(): ?Recenze
+    public function getRecenze(): ?Review
     {
         return $this->recenze;
     }
 
-    public function setRecenze(?Recenze $recenze): static
+    public function setRecenze(?Review $recenze): static
     {
         $this->recenze = $recenze;
 

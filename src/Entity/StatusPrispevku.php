@@ -18,7 +18,7 @@ class StatusPrispevku
 
     #[ORM\ManyToOne(inversedBy: 'statusPrispevkus')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Prispevek $Prispevek = null;
+    private ?Post $Prispevek = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $Datum_zmeny = null;
@@ -65,12 +65,12 @@ class StatusPrispevku
         return $this->id;
     }
 
-    public function getPrispevek(): ?Prispevek
+    public function getPrispevek(): ?Post
     {
         return $this->Prispevek;
     }
 
-    public function setPrispevek(?Prispevek $Prispevek): static
+    public function setPrispevek(?Post $Prispevek): static
     {
         $this->Prispevek = $Prispevek;
 

@@ -15,13 +15,13 @@ class PozadavekNaRecenciPrispevku
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'pozadavekNaRecenciPrispevkusRecenzent')]
-    private ?Osoba $Recenzent = null;
+    private ?User $Recenzent = null;
 
     #[ORM\ManyToOne(inversedBy: 'pozadavekNaRecenciPrispevkus')]
-    private ?Prispevek $Prispevek = null;
+    private ?Post $post = null;
 
     #[ORM\ManyToOne(inversedBy: 'pozadavekNaRecenciPrispevkusRedaktor')]
-    private ?Osoba $Redaktor = null;
+    private ?User $Redaktor = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $Start_recenzniho_rizeni = null;
@@ -34,36 +34,36 @@ class PozadavekNaRecenciPrispevku
         return $this->id;
     }
 
-    public function getRecenzent(): ?Osoba
+    public function getRecenzent(): ?User
     {
         return $this->Recenzent;
     }
 
-    public function setRecenzent(?Osoba $Recenzent): static
+    public function setRecenzent(?User $Recenzent): static
     {
         $this->Recenzent = $Recenzent;
 
         return $this;
     }
 
-    public function getPrispevek(): ?Prispevek
+    public function getPrispevek(): ?Post
     {
         return $this->Prispevek;
     }
 
-    public function setPrispevek(?Prispevek $Prispevek): static
+    public function setPrispevek(?Post $Prispevek): static
     {
         $this->Prispevek = $Prispevek;
 
         return $this;
     }
 
-    public function getRedaktor(): ?Osoba
+    public function getRedaktor(): ?User
     {
         return $this->Redaktor;
     }
 
-    public function setRedaktor(?Osoba $Redaktor): static
+    public function setRedaktor(?User $Redaktor): static
     {
         $this->Redaktor = $Redaktor;
 

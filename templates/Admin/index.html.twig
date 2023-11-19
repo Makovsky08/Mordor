@@ -32,7 +32,7 @@
     .admin-list-header, .admin-list-row {
         flex-direction: column;
     }
-}  
+}
 </style>
 {% endblock %}
 
@@ -40,7 +40,7 @@
 <div class="admin-content">
     <h2>Admin dashboard</h2>
     <h3><b>Přehled uživatelů:</b></h3>
-    
+
     <!-- Header Row -->
     <div class="admin-list-header">
         <div class="admin-list-cell">Id</div>
@@ -49,16 +49,16 @@
         <div class="admin-list-cell">Příjmení</div>
         <div class="admin-list-cell">Informace</div>
     </div>
-    
+
     <!-- User Rows -->
-    {% for osoba in osobas %}
+    {% for user in users %}
     <div class="admin-list-row">
-        <div class="admin-list-cell">{{ osoba.id }}</div>
-        <div class="admin-list-cell">{{ osoba.id }}</div>
-        <div class="admin-list-cell">{{ osoba.jmeno }}</div>
-        <div class="admin-list-cell">{{ osoba.prijmeni }}</div>
+        <div class="admin-list-cell">{{ user.id }}</div>
+        <div class="admin-list-cell">{{ user.id }}</div>
+        <div class="admin-list-cell">{{ user.name }}</div>
+        <div class="admin-list-cell">{{ user.surname }}</div>
         <div class="admin-list-cell">
-            <a href="{{ path('app_osoba_show', {'id': osoba.id}) }}">Více informací</a>
+            <a href="{{ path('app_user_show', {'id': user.id}) }}">Více informací</a>
         </div>
     </div>
     {% else %}
@@ -66,11 +66,11 @@
         <div class="admin-list-cell">Záznam nenalezen</div>
     </div>
     {% endfor %}
-    
+
     <!-- Additional Actions -->
     {% if is_granted('ROLE_ADMIN') %}
     <div class="admin-actions">
-        <a href="{{ path('app_osoba_new') }}">Přidat nového uživatele</a>
+        <a href="{{ path('app_user_new') }}">Přidat nového uživatele</a>
     </div>
     {% endif %}
 </div>

@@ -16,7 +16,7 @@ class VerzePrispevku
 
     #[ORM\ManyToOne(inversedBy: 'verzePrispevkus')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Prispevek $Prispevek = null;
+    private ?Post $Prispevek = null;
 
     #[ORM\Column(length: 255)]
     private ?string $FilePath = null;
@@ -35,12 +35,12 @@ class VerzePrispevku
         return $this->id;
     }
 
-    public function getPrispevek(): ?Prispevek
+    public function getPrispevek(): ?Post
     {
         return $this->Prispevek;
     }
 
-    public function setPrispevek(?Prispevek $Prispevek): static
+    public function setPrispevek(?Post $Prispevek): static
     {
         $this->Prispevek = $Prispevek;
 

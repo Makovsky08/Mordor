@@ -47,7 +47,7 @@ class StringToRoleTransformer implements DataTransformerInterface
             if ($role) {
                 $roles->add($role);
                 // Log each role entity
-                $this->logger->info('Adding role entity to collection', ['role' => $role->getJmenoRole()]);
+                $this->logger->info('Adding role entity to collection', ['role' => $role->getRoleTitle()]);
             } else {
                 // Log a warning if the role was not found
                 $this->logger->warning('Role entity not found', ['roleString' => $roleString]);
