@@ -100,4 +100,19 @@ class StatusPrispevku
 
         return $this;
     }
+
+    public function getStatusTitle(): ?string
+    {
+        return $this->status->getNazev();
+    }
+
+    public function getPrispevekId(): ?string
+    {
+        return $this->getPrispevek()->getId();
+    }
+
+    public function setPrispevekTitle(string $statusTitle): void
+    {
+        $this->status->setNazev($statusTitle);
+    }
 }
