@@ -1,12 +1,12 @@
 <!-- navbar.html.twig -->
 {% block navbar %}
-<li class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_register' ? 'active' : '' }}">
+<li class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}">
     <svg width="32" height="32">
         <use href="{{ asset('build/sprites.svg') ~ '#about' }}"></use>
     </svg>
     <a class="nav-link" href="{{ path('app_home') }}">O časopisu</a>
 </li>
-<li class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_register' ? 'active' : '' }}">
+<li class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_clanky' ? 'active' : '' }}">
     <svg width="32" height="32">
         <use href="{{ asset('build/sprites.svg') ~ '#articles' }}"></use>
     </svg>

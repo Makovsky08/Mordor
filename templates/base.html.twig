@@ -120,7 +120,7 @@
                                 navbar %} {% include 'navbar.html.twig' %} {%
                                 endblock %} {% if app.user %}
                                 <li
-                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_register' ? 'active' : '' }}"
+                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
                                 >
                                     <svg width="32" height="32">
                                         <use
@@ -135,7 +135,7 @@
                                 </li>
                                 {% else %}
                                 <li
-                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_register' ? 'active' : '' }}"
+                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
                                 >
                                     <svg width="32" height="32">
                                         <use
