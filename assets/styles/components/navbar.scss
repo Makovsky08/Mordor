@@ -1,11 +1,18 @@
-.nav-link {
-    padding: 0 !important;
-    margin: 0;
+.nav-item {
+    &.active,
     &:hover,
     &:focus {
         color: $dark;
-        // font-weight: 700;
         text-shadow: 0 0 1px $dark;
         transition: all 0.2s ease-out;
+        svg {
+            filter: brightness(0) saturate(100%) invert(7%) sepia(53%) saturate(4337%) hue-rotate(237deg) brightness(96%) contrast(95%);
+        }
     }
+}
+
+.nav-link {
+    padding: 0 !important;
+    margin: 0;
+
 }
