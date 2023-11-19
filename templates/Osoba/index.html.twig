@@ -8,9 +8,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Jmeno</th>
-                <th>Prijmeni</th>
-                <th>Datum_narozeni</th>
+                <th>Jméno</th>
+                <th>Příjmení</th>
+                <th>Datum_narození</th>
                 <th>Email</th>
                 {% if is_granted('ROLE_ADMIN') %}
                     <th>Heslo</th>
@@ -32,19 +32,19 @@
                 <td>
                     <a class="btn btn-info btn-sm" href="{{ path('app_osoba_show', {'id': osoba.id}) }}">Show</a>
                     {% if is_granted('ROLE_ADMIN') %}
-                        <a class="btn btn-warning btn-sm" href="{{ path('app_osoba_edit', {'id': osoba.id}) }}">Edit</a>
-                        {{ include('Osoba/_delete_form_inline.html.twig') }}
+                        <a class="btn btn-warning btn-sm" href="{{ path('app_osoba_edit', {'id': osoba.id}) }}">Editovat</a>
+                        {{ include('osoba/_delete_form_inline.html.twig') }}
                     {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">No records found</td>
+                <td colspan="7">Záznam nebyl nalezen!</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     {% if is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-success" href="{{ path('app_osoba_new') }}">Create new</a>
+        <a class="btn btn-success" href="{{ path('app_osoba_new') }}">Vytvořit</a>
     {% endif %}
 {% endblock %}
