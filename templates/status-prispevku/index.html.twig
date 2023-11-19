@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Status prispevku index{% endblock %}
+
+{% block content %}
+    <h1>Status Prispevku index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prispevek</th>
+                <th>Status</th>
+                <th>Datum zmeny</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for statusPrispevku in statusPrispevkus %}
+            <tr>
+                <td>{{ statusPrispevku.id }}</td>
+                <td><a href="{{ path('app_prispevek_show', {'id': statusPrispevku.prispevek.id}) }}">{{ statusPrispevku.prispevek.id }}</a></td>
+                <td>{{ statusPrispevku.status.nazev }}</td>
+                <td>{{ statusPrispevku.datumZmeny ? statusPrispevku.datumZmeny|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_status_prispevku_show', {'id': statusPrispevku.id}) }}">show</a>
+                    <a href="{{ path('app_status_prispevku_edit', {'id': statusPrispevku.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

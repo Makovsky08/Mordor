@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Status Prispevku{% endblock %}
+
+{% block content %}
+    <h1>Edit Status Prispevku</h1>
+
+    {{ include('status-prispevku/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_status_prispevku_index') }}">back to list</a>
+{% endblock %}
