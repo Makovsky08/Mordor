@@ -41,3 +41,25 @@ body {
 .wrapper__content {
     padding: 1.2rem 3rem;
 }
+
+
+/* Articles */
+.article-list-header, .article-list-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+
+    .article-list-cell {
+        flex: 1;
+        padding: 0.5rem;
+    }
+}
+
+.article-list-row {
+    transition: all .2s ease-out;
+    border-radius: 1rem;
+    &:hover {
+        box-shadow: 0 10px 20px 0 rgba(#DFDFFD, .6);
+    }
+}
