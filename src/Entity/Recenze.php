@@ -16,29 +16,29 @@ class Recenze
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Text = null;
+    private ?string $text = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Datum_recenze = null;
+    private ?string $datum_recenze = null;
 
     #[ORM\Column]
-    private ?int $Aktualnost = null;
+    private ?int $aktualnost = null;
 
     #[ORM\Column]
-    private ?int $Originalita = null;
+    private ?int $originalita = null;
 
     #[ORM\Column]
-    private ?int $Odborna_Uroven = null;
+    private ?int $odborna_uroven = null;
 
     #[ORM\Column]
-    private ?int $Jazykova_stylisticka_uroven = null;
+    private ?int $jazykova_stylisticka_uroven = null;
 
     #[ORM\OneToMany(mappedBy: 'recenze', targetEntity: Reakce::class)]
-    private Collection $Reakce;
+    private Collection $reakce;
 
     public function __construct()
     {
-        $this->Reakce = new ArrayCollection();
+        $this->reakce = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -48,72 +48,72 @@ class Recenze
 
     public function getText(): ?string
     {
-        return $this->Text;
+        return $this->text;
     }
 
     public function setText(string $Text): static
     {
-        $this->Text = $Text;
+        $this->text = $Text;
 
         return $this;
     }
 
     public function getDatumRecenze(): ?string
     {
-        return $this->Datum_recenze;
+        return $this->datum_recenze;
     }
 
-    public function setDatumRecenze(string $Datum_recenze): static
+    public function setDatumRecenze(string $datum_recenze): static
     {
-        $this->Datum_recenze = $Datum_recenze;
+        $this->datum_recenze = $datum_recenze;
 
         return $this;
     }
 
     public function getAktualnost(): ?int
     {
-        return $this->Aktualnost;
+        return $this->aktualnost;
     }
 
-    public function setAktualnost(int $Aktualnost): static
+    public function setAktualnost(int $aktualnost): static
     {
-        $this->Aktualnost = $Aktualnost;
+        $this->aktualnost = $aktualnost;
 
         return $this;
     }
 
     public function getOriginalita(): ?int
     {
-        return $this->Originalita;
+        return $this->originalita;
     }
 
-    public function setOriginalita(int $Originalita): static
+    public function setOriginalita(int $originalita): static
     {
-        $this->Originalita = $Originalita;
+        $this->originalita = $originalita;
 
         return $this;
     }
 
     public function getOdbornaUroven(): ?int
     {
-        return $this->Odborna_Uroven;
+        return $this->odborna_uroven;
     }
 
-    public function setOdbornaUroven(int $Odborna_Uroven): static
+    public function setOdbornaUroven(int $odborna_uroven): static
     {
-        $this->Odborna_Uroven = $Odborna_Uroven;
+        $this->odborna_uroven = $odborna_uroven;
 
         return $this;
     }
 
     public function getJazykovaStylistickaUroven(): ?int
     {
-        return $this->Jazykova_stylisticka_uroven;
+        return $this->jazykova_stylisticka_uroven;
     }
 
-    public function setJazykovaStylistickaUroven(int $Jazykova_stylisticka_uroven): static
+    public function setJazykovaStylistickaUroven(int $jazykova_stylisticka_uroven): static
     {
-        $this->Jazykova_stylisticka_uroven = $Jazykova_stylisticka_uroven;
+        $this->jazykova_stylisticka_uroven = $jazykova_stylisticka_uroven;
 
         return $this;
     }
@@ -123,13 +123,13 @@ class Recenze
      */
     public function getReakce(): Collection
     {
-        return $this->Reakce;
+        return $this->reakce;
     }
 
     public function addReakce(Reakce $reakce): static
     {
-        if (!$this->Reakce->contains($reakce)) {
-            $this->Reakce->add($reakce);
+        if (!$this->reakce->contains($reakce)) {
+            $this->reakce->add($reakce);
             $reakce->setRecenze($this);
         }
 
@@ -138,7 +138,7 @@ class Recenze
 
     public function removeReakce(Reakce $reakce): static
     {
-        if ($this->Reakce->removeElement($reakce)) {
+        if ($this->reakce->removeElement($reakce)) {
             // set the owning side to null (unless already changed)
             if ($reakce->getRecenze() === $this) {
                 $reakce->setRecenze(null);

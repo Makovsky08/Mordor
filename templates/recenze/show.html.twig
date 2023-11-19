@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recenze{% endblock %}
+
+{% block content %}
+    <h1>Recenze</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ recenze.id }}</td>
+            </tr>
+            <tr>
+                <th>Datum_recenze</th>
+                <td>{{ recenze.datumRecenze }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ recenze.text }}</td>
+            </tr>
+            <tr>
+                <th>Aktualnost</th>
+                <td>{{ recenze.aktualnost }}</td>
+            </tr>
+            <tr>
+                <th>Originalita</th>
+                <td>{{ recenze.originalita }}</td>
+            </tr>
+            <tr>
+                <th>Jazykova stylisticka uroven</th>
+                <td>{{ recenze.jazykovaStylistickaUroven }}</td>
+            </tr>
+            <tr>
+                <th>Odborna uroven</th>
+                <td>{{ recenze.odbornaUroven }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_recenze_index') }}">back to list</a>
+
+    <a href="{{ path('app_recenze_edit', {'id': recenze.id}) }}">edit</a>
+
+    {{ include('recenze/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recenze index{% endblock %}
+
+{% block content %}
+    <h1>Recenze index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Datum_recenze</th>
+            <th>Text</th>
+            <th>Aktualnost</th>
+            <th>Originalita</th>
+            <th>Stylisticka uroven</th>
+            <th>Odborna uroven</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for recenze in recenzes %}
+            <tr>
+                <td>{{ recenze.id }}</td>
+                <td>{{ recenze.datumRecenze }}</td>
+                <td>{{ recenze.text }}</td>
+                <td>{{ recenze.aktualnost }}</td>
+                <td>{{ recenze.originalita }}</td>
+                <td>{{ recenze.jazykovaStylistickaUroven }}</td>
+                <td>{{ recenze.odbornaUroven }}</td>
+                <td>
+                    <a href="{{ path('app_recenze_show', {'id': recenze.id}) }}">show</a>
+                    <a href="{{ path('app_recenze_edit', {'id': recenze.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_recenze_new') }}">Create new</a>
+{% endblock %}
