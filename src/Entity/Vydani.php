@@ -141,4 +141,10 @@ class Vydani
 
         return $this;
     }
+
+    public function __toString()
+    {
+        // This will return the Jmeno property when the Vydani object is treated as a string.
+        return $this->getJmeno();
+    }
 }

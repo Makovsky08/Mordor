@@ -17,10 +17,21 @@ class PrispevekController extends AbstractController
     #[Route('/', name: 'app_prispevek_index', methods: ['GET'])]
     public function index(PrispevekRepository $prispevekRepository): Response
     {
+        $prispeveks = $prispevekRepository->findAll();
+        $vydaniData = [];
+
+        // Assuming each Prispevek entity has a method getVydanis() that returns a collection of Vydani entities
+        foreach ($prispeveks as $prispevek) {
+            $vydaniCollection = $prispevek->getVydanis();
+            $vydaniData[$prispevek->getId()] = $vydaniCollection->isEmpty() ? null : $vydaniCollection->toArray();
+        }
+
         return $this->render('prispevek/index.html.twig', [
-            'prispeveks' => $prispevekRepository->findAll(),
+            'prispeveks' => $prispeveks,
+            'vydaniData' => $vydaniData,
         ]);
     }
+    
 
     #[Route('/new', name: 'app_prispevek_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -43,12 +54,16 @@ class PrispevekController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_prispevek_show', methods: ['GET'])]
-    public function show(Prispevek $prispevek): Response
-    {
-        return $this->render('prispevek/show.html.twig', [
-            'prispevek' => $prispevek,
-        ]);
-    }
+public function show(Prispevek $prispevek): Response
+{
+    $vydaniCollection = $prispevek->getVydanis();
+    $vydani = $vydaniCollection->isEmpty() ? null : $vydaniCollection->first();
+
+    return $this->render('prispevek/show.html.twig', [
+        'prispevek' => $prispevek,
+        'vydani' => $vydani, // Pass the first (or only) Vydání to the template
+    ]);
+}
 
     #[Route('/{id}/edit', name: 'app_prispevek_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Prispevek $prispevek, EntityManagerInterface $entityManager): Response

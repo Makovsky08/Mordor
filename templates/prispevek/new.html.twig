@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Prispevek{% endblock %}
+{% block title %}Nový příspěvek{% endblock %}
 
 {% block content %}
-    <h1>Create new Prispevek</h1>
+    <h1>Nový příspěvek</h1>
 
     {{ include('prispevek/_form.html.twig') }}
 
-    <a href="{{ path('app_prispevek_index') }}">back to list</a>
+    <a href="{{ path('app_prispevek_index') }}">Zpět</a>
 {% endblock %}

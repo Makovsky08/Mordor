@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Prispevek{% endblock %}
+{% block title %}Editovat Přispěvek{% endblock %}
 
 {% block content %}
-    <h1>Edit Prispevek</h1>
+    <h1>Editovat Přispěvek</h1>
 
-    {{ include('prispevek/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('prispevek/_form.html.twig', {'button_label': 'Updatovat'}) }}
 
-    <a href="{{ path('app_prispevek_index') }}">back to list</a>
+    <a href="{{ path('app_prispevek_index') }}">Zpět</a>
 
     {{ include('prispevek/_delete_form.html.twig') }}
 {% endblock %}

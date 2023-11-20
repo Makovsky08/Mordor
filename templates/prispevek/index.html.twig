@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Prispevek index{% endblock %}
+{% block title %}Všechny příspěvky{% endblock %}
 
 {% block content %}
-    <h1>Prispevek index</h1>
+    <h1>Všechny příspěvky</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Datum_vytvoreni</th>
-                <th>Tematika</th>
-                <th>actions</th>
+                <th>Datum vytvoření</th>
+                <th>Tématika</th>
+                <th>Akce</th>
             </tr>
         </thead>
         <tbody>
@@ -21,17 +21,17 @@
                 <td>{{ prispevek.DatumVytvoreni ? prispevek.DatumVytvoreni|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ prispevek.Tematika }}</td>
                 <td>
-                    <a href="{{ path('app_prispevek_show', {'id': prispevek.id}) }}">show</a>
-                    <a href="{{ path('app_prispevek_edit', {'id': prispevek.id}) }}">edit</a>
+                    <a href="{{ path('app_prispevek_show', {'id': prispevek.id}) }}">Zobrazit detaily</a>
+                    <a href="{{ path('app_prispevek_edit', {'id': prispevek.id}) }}">Editovat</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Záznamy nenalezeny</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_prispevek_new') }}">Create new</a>
+    <a href="{{ path('app_prispevek_new') }}">Nový příspěvek</a>
 {% endblock %}

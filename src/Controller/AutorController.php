@@ -11,21 +11,24 @@ use App\Repository\VydaniRepository;
 class AutorController extends AbstractController
 {
     #[Route('/autor', name: 'app_autor')]
-    public function index(PrispevekRepository $prispevekRepository, VydaniRepository $vydaniRepository): Response
-    {
-        $prispevky = $prispevekRepository->findAll();
+    // AutorController.php
+// ...
 
-        $vydaniData = [];
-        foreach ($prispevky as $prispevek) {
-            $vydani = $prispevek->getVydanis(); // This should return a Collection of Vydani
-            if (!$vydani->isEmpty()) {
-                $vydaniData[$prispevek->getId()] = $vydani->first(); 
-            }
-        }
+public function index(PrispevekRepository $prispevekRepository, VydaniRepository $vydaniRepository): Response
+{
+    $prispevky = $prispevekRepository->findAll();
 
-        return $this->render('Autor/index.html.twig', [
-            'prispevky' => $prispevky,
-            'vydaniData' => $vydaniData,
-        ]);
+    $vydaniData = [];
+    foreach ($prispevky as $prispevek) {
+        $vydaniCollection = $prispevek->getVydanis(); // Assuming this returns a Collection of Vydani
+        $vydaniData[$prispevek->getId()] = $vydaniCollection;
     }
+
+    return $this->render('Autor/index.html.twig', [
+        'prispevky' => $prispevky,
+        'vydaniData' => $vydaniData,
+    ]);
+}
+
+    
 }
