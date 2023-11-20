@@ -19,7 +19,7 @@ class AutorController extends AbstractController
         foreach ($prispevky as $prispevek) {
             $vydani = $prispevek->getVydanis(); // This should return a Collection of Vydani
             if (!$vydani->isEmpty()) {
-                $vydaniData[$prispevek->getId()] = $vydani->first(); // Get the first Vydani, or modify as needed
+                $vydaniData[$prispevek->getId()] = $vydani->first(); 
             }
         }
 
