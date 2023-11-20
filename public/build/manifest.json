@@ -1,0 +1,15 @@
+{
+  "build/app_js.js": "/build/app_js.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/assets_styles_app_scss.css": "/build/assets_styles_app_scss.css",
+  "build/sprites.svg": "/build/sprites.50218b7fb2d7ce0932d02528dada4a23.svg",
+  "build/images/password-show.svg": "/build/images/password-show.c8c75599.svg",
+  "build/images/add-user.svg": "/build/images/add-user.c7016e03.svg",
+  "build/images/articles.svg": "/build/images/articles.be23379c.svg",
+  "build/images/helpdesk.svg": "/build/images/helpdesk.3e01c130.svg",
+  "build/images/password.svg": "/build/images/password.787793f0.svg",
+  "build/images/logout.svg": "/build/images/logout.e0b44818.svg",
+  "build/images/about.svg": "/build/images/about.c59bc9f9.svg",
+  "build/images/login.svg": "/build/images/login.5c18b2df.svg",
+  "build/images/add.svg": "/build/images/add.f82755a0.svg"
+}

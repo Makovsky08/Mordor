@@ -1,0 +1,8 @@
+export default {
+      id: "add-user-usage",
+      viewBox: "0 0 32 32",
+      url: __webpack_public_path__ + "/app/assets/icons/add-user.svg",
+      toString: function () {
+        return this.url;
+      }
+    }
