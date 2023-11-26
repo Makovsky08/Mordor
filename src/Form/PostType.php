@@ -24,7 +24,7 @@ class PostType extends AbstractType
                     return sprintf('Číslo %d - %s', $release->getNumber(), $release->getTopics());
                 },
                 'multiple' => true, // Pokud autor může vybrat pouze jedno vydání
-                'expanded' => false, // Dropdown, ne radio buttons nebo checkboxes
+                'expanded' => true, // Dropdown, ne radio buttons nebo checkboxes
                 // 'query_builder' může být použit pro filtrování možností, pokud je to potřeba
                 'placeholder' => 'Vyberte tematické číslo',
             ])
