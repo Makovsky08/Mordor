@@ -33,7 +33,7 @@ class UserController extends AbstractController
     {
         $this->logger->info('Index method called');
 
-        return $this->render('User/index.html.twig', [
+        return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
     }
@@ -59,7 +59,7 @@ class UserController extends AbstractController
             );
             $userAdapter->setPassword($hashedPassword);
 
-            // Now set the hashed password back to the original User entity
+            // Now set the hashed password back to the original user entity
             $user->setPassword($hashedPassword);
 
             $entityManager->persist($user);
@@ -68,7 +68,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('User/new.html.twig', [
+        return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
@@ -77,7 +77,7 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        return $this->render('User/show.html.twig', [
+        return $this->render('user/show.html.twig', [
             'user' => $user,
         ]);
     }
@@ -97,7 +97,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('User/edit.html.twig', [
+        return $this->render('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);

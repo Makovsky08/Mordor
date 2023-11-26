@@ -16,12 +16,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class PostController extends AbstractController
 {
     #[Route('/', name: 'app_post_index', methods: ['GET'])]
-    public function index(PostRepository $post): Response
+    public function index(PostRepository $postRepository): Response
     {
-        return $this->render('Post/index.html.twig', [
-            'posts' => $post->findAll(),
+        $posts = $postRepository->findAll();
+        $releaseData = [];
+
+        foreach ($posts as $post) {
+            $releaseCollection = $post->getRelease();
+            $releaseData[$post->getId()] = $releaseCollection->isEmpty() ? null : $releaseCollection->toArray();
+        }
+
+        return $this->render('post/index.html.twig', [
+            'posts' => $posts,
+            'releaseData' => $releaseData,
         ]);
     }
+
 
     #[Route('/new', name: 'app_post_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -37,7 +47,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('Post/new.html.twig', [
+        return $this->render('post/new.html.twig', [
             'post' => $post,
             'form' => $form,
         ]);
@@ -46,8 +56,12 @@ class PostController extends AbstractController
     #[Route('/{id}', name: 'app_post_show', methods: ['GET'])]
     public function show(Post $post): Response
     {
-        return $this->render('Post/show.html.twig', [
+        $releaseCollection = $post->getRelease();
+        $release = $releaseCollection->isEmpty() ? null : $releaseCollection->first();
+
+        return $this->render('post/show.html.twig', [
             'post' => $post,
+            'release' => $release, // Pass the first (or only) Vydání to the template
         ]);
     }
 
@@ -63,7 +77,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('Post/edit.html.twig', [
+        return $this->render('post/edit.html.twig', [
             'post' => $post,
             'form' => $form,
         ]);

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stav příspěvku{% endblock %}
+
+{% block content %}
+    <h1>Stav příspěvku</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ statusPost.id }}</td>
+            </tr>
+            <tr>
+                <th>Příspěvek</th>
+                <td>{{ statusPost.post.id }}</td>
+            </tr>
+            <tr>
+                <th>Stav</th>
+                <th>{{ statusPost.status.title }}</th>
+            </tr>
+            <tr>
+                <th>Datum zmeny</th>
+                <td>{{ statusPost.updatedAt ? statusPost.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_status_post_index') }}">návrat na seznam</a>
+
+    <a href="{{ path('app_status_post_edit', {'id': statusPost.id}) }}">upravit</a>
+{% endblock %}

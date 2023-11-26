@@ -13,11 +13,11 @@ class AdminController extends AbstractController
     #[Route('/admin', name: 'app_admin')]
     public function index(UserRepository $userRepository): Response
     {
-        // Fetch all 'User' entities from the database
+        // Fetch all 'user' entities from the database
         $users = $userRepository->findAll();
 
-        // Render the 'Admin/index.html.twig' template, passing 'users' as a variable
-        return $this->render('Admin/index.html.twig', [
+        // Render the 'admin/index.html.twig' template, passing 'users' as a variable
+        return $this->render('admin/index.html.twig', [
             'users' => $users,
         ]);
     }

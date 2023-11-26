@@ -24,7 +24,7 @@ class UserFixture extends Fixture implements DependentFixtureInterface
             // Create your user entity
             $user = new User();
             $user->setEmail("user$i@example.com");
-            $user->setName("User$i");
+            $user->setName("user$i");
             $user->setSurname("Prijmeni$i");
             $user->setBirthdate(new \DateTime());
 

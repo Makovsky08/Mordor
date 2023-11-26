@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Repository;
 
@@ -22,7 +23,7 @@ class ReleaseRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Vydani[] Returns an array of Vydani objects
+//     * @return Release[] Returns an array of Release objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +37,7 @@ class ReleaseRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Vydani
+//    public function findOneBySomeField($value): ?Release
 //    {
 //        return $this->createQueryBuilder('v')
 //            ->andWhere('v.exampleField = :val')

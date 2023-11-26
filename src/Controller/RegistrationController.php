@@ -45,7 +45,7 @@ class RegistrationController extends AbstractController
             );
             $userAdapter->setPassword($hashedPassword);
 
-            // Now set the hashed password back to the original User entity
+            // Now set the hashed password back to the original user entity
             $user->setPassword($hashedPassword);
 
             $entityManager->persist($user);

@@ -43,20 +43,20 @@ class User
     #[ORM\InverseJoinColumn(name: 'role_id', referencedColumnName: 'id')]
     private Collection $roles;
 
-    #[ORM\OneToMany(mappedBy: 'Author', targetEntity: Post::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Post::class, orphanRemoval: true)]
     private Collection $posts;
 
-    #[ORM\OneToMany(mappedBy: 'Odkoho', targetEntity: Reakce::class)]
-    private Collection $reakcesOdkoho;
+    #[ORM\OneToMany(mappedBy: 'From', targetEntity: Response::class)]
+    private Collection $responseFrom;
 
-    #[ORM\OneToMany(mappedBy: 'Komu', targetEntity: Reakce::class)]
-    private Collection $reakcesKomu;
+    #[ORM\OneToMany(mappedBy: 'To', targetEntity: Response::class)]
+    private Collection $responseTo;
 
-    #[ORM\OneToMany(mappedBy: 'Reviewer', targetEntity: PozadavekNaRecenciPrispevku::class)]
-    private Collection $pozadavekNaRecenciPrispevkusRecenzent;
+    #[ORM\OneToMany(mappedBy: 'Reviewer', targetEntity: ResponseRequest::class)]
+    private Collection $responseRequestReviewer;
 
-    #[ORM\OneToMany(mappedBy: 'Redaktor', targetEntity: PozadavekNaRecenciPrispevku::class)]
-    private Collection $pozadavekNaRecenciPrispevkusRedaktor;
+    #[ORM\OneToMany(mappedBy: 'editor', targetEntity: ResponseRequest::class)]
+    private Collection $responseRequestEditor;
 
 
 
@@ -64,10 +64,10 @@ class User
     {
         $this->roles = new ArrayCollection();
         $this->posts = new ArrayCollection();
-        $this->reakcesOdkoho = new ArrayCollection();
-        $this->reakcesKomu = new ArrayCollection();
-        $this->pozadavekNaRecenciPrispevkusRecenzent = new ArrayCollection();
-        $this->pozadavekNaRecenciPrispevkusRedaktor = new ArrayCollection();
+        $this->responseFrom = new ArrayCollection();
+        $this->responseTo = new ArrayCollection();
+        $this->responseRequestReviewer = new ArrayCollection();
+        $this->responseRequestEditor = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -200,29 +200,29 @@ class User
     }
 
     /**
-     * @return Collection<int, Reakce>
+     * @return Collection<int, Response>
      */
-    public function getreakcesOdkoho(): Collection
+    public function getResponseFrom(): Collection
     {
-        return $this->reakcesOdkoho;
+        return $this->responseFrom;
     }
 
-    public function addReakceOdkoho(Reakce $reakce): static
+    public function addResponseFrom(Response $response): static
     {
-        if (!$this->reakcesOdkoho->contains($reakce)) {
-            $this->reakcesOdkoho->add($reakce);
-            $reakce->setOdkoho($this);
+        if (!$this->responseFrom->contains($response)) {
+            $this->responseFrom->add($response);
+            $response->setFrom($this);
         }
 
         return $this;
     }
 
-    public function removeReakceOdkoho(Reakce $reakce): static
+    public function removeResponseFrom(Response $response): static
     {
-        if ($this->reakcesOdkoho->removeElement($reakce)) {
+        if ($this->responseFrom->removeElement($response)) {
             // set the owning side to null (unless already changed)
-            if ($reakce->getOdkoho() === $this) {
-                $reakce->setOdkoho(null);
+            if ($response->getFrom() === $this) {
+                $response->setFrom(null);
             }
         }
 
@@ -231,29 +231,29 @@ class User
 
 
     /**
-     * @return Collection<int, Reakce>
+     * @return Collection<int, Response>
      */
-    public function getreakcesKomu(): Collection
+    public function getResponseTo(): Collection
     {
-        return $this->reakcesKomu;
+        return $this->responseTo;
     }
 
-    public function addReakceKomu(Reakce $reakce): static
+    public function addResponseTo(Response $response): static
     {
-        if (!$this->reakcesKomu->contains($reakce)) {
-            $this->reakcesKomu->add($reakce);
-            $reakce->setOdkoho($this);
+        if (!$this->responseTo->contains($response)) {
+            $this->responseTo->add($response);
+            $response->setFrom($this);
         }
 
         return $this;
     }
 
-    public function removeReakceKomu(Reakce $reakce): static
+    public function removeResponseTo(Response $response): static
     {
-        if ($this->reakcesKomu->removeElement($reakce)) {
+        if ($this->responseTo->removeElement($response)) {
             // set the owning side to null (unless already changed)
-            if ($reakce->getKomu() === $this) {
-                $reakce->setKomu(null);
+            if ($response->getTo() === $this) {
+                $response->setTo(null);
             }
         }
 
@@ -261,29 +261,29 @@ class User
     }
 
     /**
-     * @return Collection<int, PozadavekNaRecenciPrispevku>
+     * @return Collection<int, ResponseRequest>
      */
-    public function getpozadavekNaRecenciPrispevkusRecenzent(): Collection
+    public function getResponseRequestReviewer(): Collection
     {
-        return $this->pozadavekNaRecenciPrispevkusRecenzent;
+        return $this->responseRequestReviewer;
     }
 
-    public function addPozadavekNaRecenciPrispevkuRecenzent(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    public function addResponseRequestReviewer(ResponseRequest $responseRequest): static
     {
-        if (!$this->pozadavekNaRecenciPrispevkusRecenzent->contains($pozadavekNaRecenciPrispevku)) {
-            $this->pozadavekNaRecenciPrispevkusRecenzent->add($pozadavekNaRecenciPrispevku);
-            $pozadavekNaRecenciPrispevku->setRecenzent($this);
+        if (!$this->responseRequestReviewer->contains($responseRequest)) {
+            $this->responseRequestReviewer->add($responseRequest);
+            $responseRequest->setReviewer($this);
         }
 
         return $this;
     }
 
-    public function removePozadavekNaRecenciPrispevkuRecenzent(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    public function removeResponseRequestReviewer(ResponseRequest $responseRequest): static
     {
-        if ($this->pozadavekNaRecenciPrispevkusRecenzent->removeElement($pozadavekNaRecenciPrispevku)) {
+        if ($this->responseRequestReviewer->removeElement($responseRequest)) {
             // set the owning side to null (unless already changed)
-            if ($pozadavekNaRecenciPrispevku->getRecenzent() === $this) {
-                $pozadavekNaRecenciPrispevku->setRecenzent(null);
+            if ($responseRequest->getReviewer() === $this) {
+                $responseRequest->setReviewer(null);
             }
         }
 
@@ -292,29 +292,29 @@ class User
 
 
         /**
-     * @return Collection<int, PozadavekNaRecenciPrispevku>
+     * @return Collection<int, ResponseRequest>
      */
-    public function getpozadavekNaRecenciPrispevkusRedaktor(): Collection
+    public function getResponseRequestEditor(): Collection
     {
-        return $this->pozadavekNaRecenciPrispevkusRedaktor;
+        return $this->responseRequestEditor;
     }
 
-    public function addPozadavekNaRecenciPrispevkuRedaktor(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    public function addResponseRequestEditor(ResponseRequest $responseRequest): static
     {
-        if (!$this->pozadavekNaRecenciPrispevkusRedaktor->contains($pozadavekNaRecenciPrispevku)) {
-            $this->pozadavekNaRecenciPrispevkusRedaktor->add($pozadavekNaRecenciPrispevku);
-            $pozadavekNaRecenciPrispevku->setRedaktor($this);
+        if (!$this->responseRequestEditor->contains($responseRequest)) {
+            $this->responseRequestEditor->add($responseRequest);
+            $responseRequest->setEditor($this);
         }
 
         return $this;
     }
 
-    public function removePozadavekNaRecenciPrispevkuRedaktor(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    public function removeResponseRequestEditor(ResponseRequest $responseRequest): static
     {
-        if ($this->pozadavekNaRecenciPrispevkusRedaktor->removeElement($pozadavekNaRecenciPrispevku)) {
+        if ($this->responseRequestEditor->removeElement($responseRequest)) {
             // set the owning side to null (unless already changed)
-            if ($pozadavekNaRecenciPrispevku->getRedaktor() === $this) {
-                $pozadavekNaRecenciPrispevku->setRedaktor(null);
+            if ($responseRequest->getEditor() === $this) {
+                $responseRequest->setEditor(null);
             }
         }
 

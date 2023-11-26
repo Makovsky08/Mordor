@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\DataFixtures;
 
@@ -15,8 +16,8 @@ class StatusFixtures extends Fixture
         ['Vráceno', 'Článek byl vrácen bez dalšího komentáře', 'ROLE_AUTHOR'],
         ['Čeká na stanovení recenzentů', 'Probíhá výběr vhodných recenzentů', 'ROLE_EDITOR'],
         ['Recenzní řízení probíhá', 'Recenzní řízení článku je v procesu', 'ROLE_REVIEWER'],
-        ['Posudek Review 1 doručen redakci', 'První posudek Review byl doručen redakci', 'ROLE_EDITOR'],
-        ['Posudek Review 2 doručen redakci', 'Druhý posudek Review byl doručen redakci', 'ROLE_EDITOR'],
+        ['Posudek review 1 doručen redakci', 'První posudek review byl doručen redakci', 'ROLE_EDITOR'],
+        ['Posudek review 2 doručen redakci', 'Druhý posudek review byl doručen redakci', 'ROLE_EDITOR'],
         ['Posudky odeslány autorovi', 'Posudky byly odeslány autorovi k přezkoumání', 'ROLE_AUTHOR'],
         ['Čeká na dodatečné opravy ze strany autora', 'Čeká se na dodatečné opravy od autora', 'ROLE_AUTHOR'],
         ['Čeká na dodatečné vyjádření ze strany recenzenta', 'Čeká se na dodatečné vyjádření od recenzenta', 'ROLE_REVIEWER'],
@@ -37,11 +38,16 @@ class StatusFixtures extends Fixture
     }
 
 
-    public function newStatus($nazev, $popis, $zodpovednaRole, ObjectManager $manager) {
+    public function newStatus(
+        string $title,
+        string $description,
+        $responsibleRole,
+        ObjectManager $manager
+    ): void {
         $status = new Status();
-        $status->setNazev($nazev);
-        $status->setPopis($popis);
-        $status->setZodpovednaRole($this->getReference($zodpovednaRole)); // Set the related role
+        $status->setTitle($title);
+        $status->setDescription($description);
+        $status->setResponsibleRole($this->getReference($responsibleRole)); // Set the related role
 
         $manager->persist($status);
 

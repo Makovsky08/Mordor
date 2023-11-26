@@ -27,28 +27,28 @@ class Post
     #[ORM\Column(length: 255)]
     private ?string $topics = null;
 
-    #[ORM\OneToMany(mappedBy: 'post', targetEntity: VerzePrispevku::class, orphanRemoval: true)]
-    private Collection $verzePrispevkus;
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: VersionPost::class, orphanRemoval: true)]
+    private Collection $versionPosts;
 
     #[ORM\ManyToMany(targetEntity: Release::class, mappedBy: 'post')]
     private Collection $release;
 
-    #[ORM\OneToMany(mappedBy: 'post', targetEntity: StatusPrispevku::class, orphanRemoval: true)]
-    private Collection $statusPrispevkus;
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: StatusPost::class, orphanRemoval: true)]
+    private Collection $statusPosts;
 
-    #[ORM\OneToMany(mappedBy: 'Odkazovany_prispevek', targetEntity: Reakce::class)]
-    private Collection $reakces;
+    #[ORM\OneToMany(mappedBy: 'related_post', targetEntity: Response::class)]
+    private Collection $responses;
 
-    #[ORM\OneToMany(mappedBy: 'post', targetEntity: PozadavekNaRecenciPrispevku::class)]
-    private Collection $pozadavekNaRecenciPrispevkus;
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: ResponseRequest::class)]
+    private Collection $responseRequests;
 
     public function __construct()
     {
-        $this->verzePrispevkus = new ArrayCollection();
+        $this->versionPosts = new ArrayCollection();
         $this->release = new ArrayCollection();
-        $this->statusPrispevkus = new ArrayCollection();
-        $this->reakces = new ArrayCollection();
-        $this->pozadavekNaRecenciPrispevkus = new ArrayCollection();
+        $this->statusPosts = new ArrayCollection();
+        $this->responses = new ArrayCollection();
+        $this->responseRequests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,29 +93,29 @@ class Post
     }
 
     /**
-     * @return Collection<int, VerzePrispevku>
+     * @return Collection<int, VersionPost>
      */
-    public function getVerzePrispevkus(): Collection
+    public function getVersionPosts(): Collection
     {
-        return $this->verzePrispevkus;
+        return $this->versionPosts;
     }
 
-    public function addVerzePrispevku(VerzePrispevku $verzePrispevku): static
+    public function addVersionPost(VersionPost $versionPost): static
     {
-        if (!$this->verzePrispevkus->contains($verzePrispevku)) {
-            $this->verzePrispevkus->add($verzePrispevku);
-            $verzePrispevku->setPrispevek($this);
+        if (!$this->versionPosts->contains($versionPost)) {
+            $this->versionPosts->add($versionPost);
+            $versionPost->setPost($this);
         }
 
         return $this;
     }
 
-    public function removeVerzePrispevku(VerzePrispevku $verzePrispevku): static
+    public function removeVersionPost(VersionPost $versionPost): static
     {
-        if ($this->verzePrispevkus->removeElement($verzePrispevku)) {
+        if ($this->versionPosts->removeElement($versionPost)) {
             // set the owning side to null (unless already changed)
-            if ($verzePrispevku->getPrispevek() === $this) {
-                $verzePrispevku->setPrispevek(null);
+            if ($versionPost->getPost() === $this) {
+                $versionPost->setPost(null);
             }
         }
 
@@ -150,29 +150,29 @@ class Post
     }
 
     /**
-     * @return Collection<int, StatusPrispevku>
+     * @return Collection<int, StatusPost>
      */
-    public function getStatusPrispevkus(): Collection
+    public function getStatusPosts(): Collection
     {
-        return $this->statusPrispevkus;
+        return $this->statusPosts;
     }
 
-    public function addStatusPrispevku(StatusPrispevku $statusPrispevku): static
+    public function addStatusPost(StatusPost $statusPost): static
     {
-        if (!$this->statusPrispevkus->contains($statusPrispevku)) {
-            $this->statusPrispevkus->add($statusPrispevku);
-            $statusPrispevku->setPrispevek($this);
+        if (!$this->statusPosts->contains($statusPost)) {
+            $this->statusPosts->add($statusPost);
+            $statusPost->setPost($this);
         }
 
         return $this;
     }
 
-    public function removeStatusPrispevku(StatusPrispevku $statusPrispevku): static
+    public function removeStatusPost(StatusPost $statusPost): static
     {
-        if ($this->statusPrispevkus->removeElement($statusPrispevku)) {
+        if ($this->statusPosts->removeElement($statusPost)) {
             // set the owning side to null (unless already changed)
-            if ($statusPrispevku->getPrispevek() === $this) {
-                $statusPrispevku->setPrispevek(null);
+            if ($statusPost->getPost() === $this) {
+                $statusPost->setPost(null);
             }
         }
 
@@ -180,29 +180,29 @@ class Post
     }
 
     /**
-     * @return Collection<int, Reakce>
+     * @return Collection<int, Response>
      */
-    public function getReakces(): Collection
+    public function getResponses(): Collection
     {
-        return $this->reakces;
+        return $this->responses;
     }
 
-    public function addReakce(Reakce $reakce): static
+    public function addResponse(Response $response): static
     {
-        if (!$this->reakces->contains($reakce)) {
-            $this->reakces->add($reakce);
-            $reakce->setOdkazovanyPrispevek($this);
+        if (!$this->responses->contains($response)) {
+            $this->responses->add($response);
+            $response->setRelatedPost($this);
         }
 
         return $this;
     }
 
-    public function removeReakce(Reakce $reakce): static
+    public function removeResponse(Response $response): static
     {
-        if ($this->reakces->removeElement($reakce)) {
+        if ($this->responses->removeElement($response)) {
             // set the owning side to null (unless already changed)
-            if ($reakce->getOdkazovanyPrispevek() === $this) {
-                $reakce->setOdkazovanyPrispevek(null);
+            if ($response->getRelatedPost() === $this) {
+                $response->setRelatedPost(null);
             }
         }
 
@@ -210,29 +210,29 @@ class Post
     }
 
     /**
-     * @return Collection<int, PozadavekNaRecenciPrispevku>
+     * @return Collection<int, ResponseRequest>
      */
-    public function getPozadavekNaRecenciPrispevkus(): Collection
+    public function getResponseRequests(): Collection
     {
-        return $this->pozadavekNaRecenciPrispevkus;
+        return $this->responseRequests;
     }
 
-    public function addPozadavekNaRecenciPrispevku(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    public function addResponseRequestPost(ResponseRequest $responseRequest): static
     {
-        if (!$this->pozadavekNaRecenciPrispevkus->contains($pozadavekNaRecenciPrispevku)) {
-            $this->pozadavekNaRecenciPrispevkus->add($pozadavekNaRecenciPrispevku);
-            $pozadavekNaRecenciPrispevku->setPrispevek($this);
+        if (!$this->responseRequests->contains($responseRequest)) {
+            $this->responseRequests->add($responseRequest);
+            $responseRequest->setPost($this);
         }
 
         return $this;
     }
 
-    public function removePozadavekNaRecenciPrispevku(PozadavekNaRecenciPrispevku $pozadavekNaRecenciPrispevku): static
+    public function removeResponseRequestPost(ResponseRequest $responseRequest): static
     {
-        if ($this->pozadavekNaRecenciPrispevkus->removeElement($pozadavekNaRecenciPrispevku)) {
+        if ($this->responseRequests->removeElement($responseRequest)) {
             // set the owning side to null (unless already changed)
-            if ($pozadavekNaRecenciPrispevku->getPrispevek() === $this) {
-                $pozadavekNaRecenciPrispevku->setPrispevek(null);
+            if ($responseRequest->getPost() === $this) {
+                $responseRequest->setPost(null);
             }
         }
 

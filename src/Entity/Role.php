@@ -40,7 +40,7 @@ class Role
     {
         if (!$this->statuses->contains($status)) {
             $this->statuses->add($status);
-            $status->setZodpovednaRole($this);
+            $status->setResponsibleRole($this);
         }
 
         return $this;
@@ -49,7 +49,7 @@ class Role
     public function removeStatus(Status $status): static
     {
         if ($this->statuses->removeElement($status)) {
-            $status->setZodpovednaRole(null);
+            $status->setResponsibleRole(null);
         }
 
         return $this;

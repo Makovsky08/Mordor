@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Příspěvek{% endblock %}
+
+{% block content %}
+
+<style>
+ .list-header, .list-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+.list-header {
+    font-weight: bold;
+}
+
+.list-cell {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+/* Assuming .list-header and .list-row are direct children of .list */
+.list > .list-header {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.list > .list-row:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .list-header, .list-row {
+        flex-direction: column;
+    }
+}
+</style>
+
+    <h1>Příspěvek</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ post.id }}</td>
+            </tr>
+            <tr>
+                <th>Datum vytvoření</th>
+                <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Tématika</th>
+                <td>{{ post.topics }}</td>
+            </tr>
+            <tr>
+                <th>Jméno autora</th>
+                <td>{{ post.author }}</td>
+            </tr>
+             <tr>
+            <th>Vydání</th>
+            <td>
+                {% if release %}
+                    {{ release.id }}: {{ release.name }}
+                {% else %}
+                    Žádné vydání
+                {% endif %}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_post_index') }}">Zpět</a>
+
+    <a href="{{ path('app_post_edit', {'id': post.id}) }}">Editovat</a>
+
+    {{ include('post/_delete_form.html.twig') }}
+{% endblock %}

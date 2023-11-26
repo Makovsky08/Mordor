@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\Entity\User; // Update with the correct namespace
+use DateTimeInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -68,9 +69,9 @@ class UserAdapter implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Summary of getBirthdate
-     * @return \DateTimeInterface|null
+     * @return DateTimeInterface|null
      */
-    public function getBirthdate(): ?\DateTimeInterface
+    public function getBirthdate(): ?DateTimeInterface
     {
         return $this->user->getBirthdate();
     }
@@ -82,10 +83,10 @@ class UserAdapter implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * Summary of setBirthdate
-     * @param \DateTimeInterface $datum_narozeni
+     * @param DateTimeInterface $birthdate
      * @return static
      */
-    public function setBirthdate(\DateTimeInterface $birthdate): static
+    public function setBirthdate(DateTimeInterface $birthdate): static
     {
         $this->user->setBirthdate($birthdate);
 
@@ -153,7 +154,7 @@ class UserAdapter implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        // Adapt to use the appropriate method from the User entity
+        // Adapt to use the appropriate method from the user entity
         return $this->user->getEmail();
     }
 
@@ -174,10 +175,10 @@ class UserAdapter implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         // This method is required in Symfony 5.3+
-        // Replace with the appropriate identifier field from your User entity
+        // Replace with the appropriate identifier field from your user entity
         return $this->user->getEmail(); // or getUsername(), if it's different
     }
 
-    // Delegate any other necessary methods to the User entity:
-    // e.g., if User has a method for a refresh token, API token, etc.
+    // Delegate any other necessary methods to the user entity:
+    // e.g., if user has a method for a refresh token, API token, etc.
 }

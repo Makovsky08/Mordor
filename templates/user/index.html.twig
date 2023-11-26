@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Uživatelé{% endblock %}
+
+{% block content %}
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jméno</th>
+                <th>Příjmění</th>
+                <th>Datum narození</th>
+                <th>Email</th>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>Heslo</th>
+                {% endif %}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : '' }}</td>
+                <td>{{ user.email }}</td>
+                {% if is_granted('ROLE_ADMIN') %}
+                        <td>{{ user.password }}</td>
+                {% endif %}
+                <td>
+                    <a class="btn btn-info btn-sm" href="{{ path('app_user_show', {'id': user.id}) }}">Show</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-warning btn-sm" href="{{ path('app_user_edit', {'id': user.id}) }}">Editovat</a>
+                        {{ include('user/_delete_form_inline.html.twig') }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Záznam nebyl nalezen!</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-success" href="{{ path('app_user_new') }}">Vytvořit</a>
+    {% endif %}
+{% endblock %}

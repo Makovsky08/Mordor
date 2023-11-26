@@ -34,7 +34,7 @@ class Release
     #[ORM\Column]
     private ?int $number = null;
 
-    #[ORM\ManyToMany(targetEntity: Post::class, inversedBy: 'release')]
+    #[ORM\ManyToMany(targetEntity: Post::class, inversedBy: 'releases')]
     private Collection $post;
 
     public function __construct()
@@ -127,10 +127,10 @@ class Release
         return $this->post;
     }
 
-    public function addPost(Post $particle): static
+    public function addPost(Post $post): static
     {
-        if (!$this->post->contains($particle)) {
-            $this->post->add($particle);
+        if (!$this->post->contains($post)) {
+            $this->post->add($post);
         }
 
         return $this;
@@ -141,5 +141,11 @@ class Release
         $this->post->removeElement($post);
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        // This will return the Jmeno property when the Release object is treated as a string.
+        return $this->getTitle();
     }
 }

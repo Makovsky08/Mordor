@@ -7,31 +7,31 @@
 
 <div class="form-flex">
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.jmeno) }}
-        {{ form_widget(registrationForm.jmeno, {'attr': {'class': 'form-control'
+        {{ form_label(registrationForm.name) }}
+        {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control'
 
 
         }}) }}
-        {{ form_errors(registrationForm.jmeno) }}
+        {{ form_errors(registrationForm.name) }}
     </div>
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.prijmeni) }}
-        {{ form_widget(registrationForm.prijmeni, {'attr': {'class': 'form-control'
+        {{ form_label(registrationForm.surname) }}
+        {{ form_widget(registrationForm.surname, {'attr': {'class': 'form-control'
 
 
         }}) }}
-        {{ form_errors(registrationForm.prijmeni) }}
+        {{ form_errors(registrationForm.surname) }}
     </div>
 </div>
 
 <div class="form-flex">
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.datum_narozeni) }}
-        {{ form_widget(registrationForm.datum_narozeni, {'attr': {'class': 'form-control'
+        {{ form_label(registrationForm.birthdate) }}
+        {{ form_widget(registrationForm.birthdate, {'attr': {'class': 'form-control'
 
 
         }}) }}
-        {{ form_errors(registrationForm.datum_narozeni) }}
+        {{ form_errors(registrationForm.birthdate) }}
     </div>
 
     <div class="form-group mb-4">
@@ -46,21 +46,21 @@
 
 <div class="form-flex">
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.heslo.first) }}
-        {{ form_widget(registrationForm.heslo.first, {'attr': {'class': 'form-control'
+        {{ form_label(registrationForm.password.first) }}
+        {{ form_widget(registrationForm.password.first, {'attr': {'class': 'form-control'
 
 
         }}) }}
-        {{ form_errors(registrationForm.heslo.first) }}
+        {{ form_errors(registrationForm.password.first) }}
     </div>
 
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.heslo.second) }}
-        {{ form_widget(registrationForm.heslo.second, {'attr': {'class': 'form-control'
+        {{ form_label(registrationForm.password.second) }}
+        {{ form_widget(registrationForm.password.second, {'attr': {'class': 'form-control'
 
 
         }}) }}
-        {{ form_errors(registrationForm.heslo.second) }}
+        {{ form_errors(registrationForm.password.second) }}
     </div>
 </div>
 

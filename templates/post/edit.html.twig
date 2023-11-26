@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Upravit Přispěvek{% endblock %}
+
+{% block content %}
+    <h1>Upravit Přispěvek</h1>
+
+    {{ include('post/_form.html.twig', {'button_label': 'Updatovat'}) }}
+
+    <a href="{{ path('app_post_index') }}">Zpět</a>
+
+    {{ include('post/_delete_form.html.twig') }}
+{% endblock %}

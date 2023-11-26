@@ -38,7 +38,7 @@ class Review
     #[ORM\Column]
     private ?int $stylistics_level = null;
 
-    #[ORM\OneToMany(mappedBy: 'Review', targetEntity: Reakce::class)]
+    #[ORM\OneToMany(mappedBy: 'review', targetEntity: Response::class)]
     private Collection $reakce;
 
     public function __construct() {
@@ -127,7 +127,7 @@ class Review
         return $this->stylistics_level;
     }
 
-    public function setJStylisticsLevel(int $stylisticsLevel): static
+    public function setStylisticsLevel(int $stylisticsLevel): static
     {
         $this->stylistics_level = $stylisticsLevel;
 
@@ -135,29 +135,29 @@ class Review
     }
 
     /**
-     * @return Collection<int, Reakce>
+     * @return Collection<int, Response>
      */
-    public function getReakce(): Collection
+    public function getResponse(): Collection
     {
         return $this->reakce;
     }
 
-    public function addReakce(Reakce $reakce): static
+    public function addResponse(Response $response): static
     {
-        if (!$this->reakce->contains($reakce)) {
-            $this->reakce->add($reakce);
-            $reakce->setRecenze($this);
+        if (!$this->reakce->contains($response)) {
+            $this->reakce->add($response);
+            $response->setReview($this);
         }
 
         return $this;
     }
 
-    public function removeReakce(Reakce $reakce): static
+    public function removeResponse(Response $response): static
     {
-        if ($this->reakce->removeElement($reakce)) {
+        if ($this->reakce->removeElement($response)) {
             // set the owning side to null (unless already changed)
-            if ($reakce->getRecenze() === $this) {
-                $reakce->setRecenze(null);
+            if ($response->getReview() === $this) {
+                $response->setReview(null);
             }
         }
 

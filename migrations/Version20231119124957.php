@@ -24,6 +24,10 @@ final class Version20231119124957 extends AbstractMigration
         $this->addSql('ALTER SEQUENCE prispevek_id_seq RENAME TO post_id_seq');
         $this->addSql('ALTER SEQUENCE recenze_id_seq RENAME TO review_id_seq');
         $this->addSql('ALTER SEQUENCE vydani_id_seq RENAME TO release_id_seq');
+        $this->addSql('ALTER SEQUENCE pozadavek_na_recenci_prispevku_id_seq RENAME TO release_request_id_seq');
+        $this->addSql('ALTER SEQUENCE reakce_id_seq RENAME TO response_id_seq');
+        $this->addSql('ALTER SEQUENCE status_prispevku_id_seq RENAME TO status_post_id_seq');
+        $this->addSql('ALTER SEQUENCE verze_prispevku_id_seq RENAME TO version_post_id_seq');
 
         $this->addSql('ALTER TABLE osoba RENAME CONSTRAINT osoba_pkey TO person_pkey');
         $this->addSql('ALTER TABLE osoba RENAME COLUMN jmeno TO name');
@@ -62,22 +66,48 @@ final class Version20231119124957 extends AbstractMigration
         $this->addSql('ALTER TABLE Vydani RENAME COLUMN Tematika TO topics');
         $this->addSql('ALTER TABLE Vydani RENAME COLUMN Kapacita TO capacity');
         $this->addSql('ALTER TABLE Vydani RENAME COLUMN cislo TO number');
-        $this->addSql('ALTER TABLE Vydani RENAME TO release');
+        $this->addSql('ALTER TABLE Release RENAME TO Release');
 
+        $this->addSql('ALTER TABLE vydani_prispevku RENAME CONSTRAINT vydani_prispevku_pkey TO release_post_pkey');
+        $this->addSql('ALTER TABLE vydani_prispevku RENAME COLUMN vydani_id TO release_id');
+        $this->addSql('ALTER TABLE vydani_prispevku RENAME COLUMN prispevek_id TO post_id');
+        $this->addSql('ALTER TABLE vydani_prispevku RENAME TO release_post');
 
-        $this->addSql('ALTER TABLE vydani_prispevek RENAME CONSTRAINT vydani_prispevek_pkey TO release_post_pkey');
-        $this->addSql('ALTER TABLE vydani_prispevek RENAME COLUMN vydani_id TO release_id');
-        $this->addSql('ALTER TABLE vydani_prispevek RENAME COLUMN prispevek_id TO post_id');
-        $this->addSql('ALTER TABLE vydani_prispevek RENAME TO release_post');
+        $this->addSql('ALTER TABLE verze_prispevku RENAME CONSTRAINT verze_prispevku_pkey TO version_post_pkey');
+        $this->addSql('ALTER TABLE verze_prispevku RENAME COLUMN prispevek_id TO post_id');
+        $this->addSql('ALTER TABLE verze_prispevku RENAME COLUMN popis TO description');
+        $this->addSql('ALTER TABLE verze_prispevku RENAME COLUMN jmeno TO title');
+        $this->addSql('ALTER TABLE verze_prispevku RENAME COLUMN datum_verze TO updated_at');
+        $this->addSql('ALTER TABLE verze_prispevku RENAME TO version_post');
+
+        $this->addSql('ALTER TABLE status RENAME COLUMN zodpovedna_role_id TO responsible_role_id');
+        $this->addSql('ALTER TABLE status RENAME COLUMN nazev TO title');
+        $this->addSql('ALTER TABLE status RENAME COLUMN popis TO description');
+
+        $this->addSql('ALTER TABLE status_prispevku RENAME CONSTRAINT status_prispevku_pkey TO status_post_pkey');
+        $this->addSql('ALTER TABLE status_prispevku RENAME COLUMN prispevek_id TO post_id');
+        $this->addSql('ALTER TABLE status_prispevku RENAME COLUMN datum_zmeny TO updated_at');
+        $this->addSql('ALTER TABLE status_prispevku RENAME TO status_post');
+
+        $this->addSql('ALTER TABLE pozadavek_na_recenci_prispevku RENAME CONSTRAINT pozadavek_na_recenci_prispevku_pkey TO response_request_pkey');
+        $this->addSql('ALTER TABLE pozadavek_na_recenci_prispevku RENAME COLUMN recenzent_id TO reviewer_id');
+        $this->addSql('ALTER TABLE pozadavek_na_recenci_prispevku RENAME COLUMN prispevek_id TO post_id');
+        $this->addSql('ALTER TABLE pozadavek_na_recenci_prispevku RENAME COLUMN redaktor_id TO editor_id');
+        $this->addSql('ALTER TABLE pozadavek_na_recenci_prispevku RENAME COLUMN start_recenzniho_rizeni TO start_review');
+        $this->addSql('ALTER TABLE pozadavek_na_recenci_prispevku RENAME COLUMN konec_recenzniho_rizeni TO end_review');
+        $this->addSql('ALTER TABLE pozadavek_na_recenci_prispevku RENAME TO response_request');
     }
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER SEQUENCE user_id RENAME TO osoba_id_seq');
+        $this->addSql('ALTER SEQUENCE person_id_seq RENAME TO osoba_id_seq');
         $this->addSql('ALTER SEQUENCE post_id_seq RENAME TO prispevek_id_seq');
         $this->addSql('ALTER SEQUENCE review_id_seq RENAME TO recenze_id_seq');
         $this->addSql('ALTER SEQUENCE release_id_seq RENAME TO vydani_id_seq');
+        $this->addSql('ALTER SEQUENCE release_request_id_seq RENAME TO pozadavek_na_recenci_prispevku_id_seq');
+        $this->addSql('ALTER SEQUENCE response_id_seq RENAME TO reakce_id_seq');
+        $this->addSql('ALTER SEQUENCE status_post_id_seq RENAME TO status_prispevku_id_seq');
+        $this->addSql('ALTER SEQUENCE version_post_id_seq RENAME TO verze_prispevku_id_seq');
 
         $this->addSql('ALTER TABLE person RENAME CONSTRAINT person_pkey TO osoba_pkey');
         $this->addSql('ALTER TABLE person RENAME COLUMN name TO jmeno');
@@ -116,11 +146,35 @@ final class Version20231119124957 extends AbstractMigration
         $this->addSql('ALTER TABLE release RENAME COLUMN topics TO Tematika');
         $this->addSql('ALTER TABLE release RENAME COLUMN capacity TO Kapacita');
         $this->addSql('ALTER TABLE release RENAME COLUMN number TO cislo');
-        $this->addSql('ALTER TABLE release RENAME TO Vydani');
+        $this->addSql('ALTER TABLE release RENAME TO vydani');
 
         $this->addSql('ALTER TABLE release_post RENAME CONSTRAINT release_post_pkey TO vydani_prispevek_pkey');
         $this->addSql('ALTER TABLE release_post RENAME COLUMN release_id TO vydani_id');
         $this->addSql('ALTER TABLE release_post RENAME COLUMN post_id TO prispevek_id');
         $this->addSql('ALTER TABLE release_post RENAME TO vydani_prispevek');
+
+        $this->addSql('ALTER TABLE version_post RENAME CONSTRAINT version_post_pkey TO verze_prispevku_pkey');
+        $this->addSql('ALTER TABLE version_post RENAME COLUMN post_id TO prispevek_id');
+        $this->addSql('ALTER TABLE version_post RENAME COLUMN description TO popis');
+        $this->addSql('ALTER TABLE version_post RENAME COLUMN title TO jmeno');
+        $this->addSql('ALTER TABLE version_post RENAME COLUMN updated_at TO datum_verze');
+        $this->addSql('ALTER TABLE version_post RENAME TO verze_prispevku');
+
+        $this->addSql('ALTER TABLE status DROP COLUMN resnposible_role_id');
+        $this->addSql('ALTER TABLE status RENAME COLUMN title TO nazev');
+        $this->addSql('ALTER TABLE status RENAME COLUMN description TO popis');
+
+        $this->addSql('ALTER TABLE status_post RENAME CONSTRAINT status_post_pkey TO status_prispevku_pkey');
+        $this->addSql('ALTER TABLE status_post RENAME COLUMN post_id TO prispevek_id');
+        $this->addSql('ALTER TABLE status_post RENAME COLUMN updated_at TO datum_zmeny');
+        $this->addSql('ALTER TABLE status_post RENAME TO status_prispeveku');
+
+        $this->addSql('ALTER TABLE response_request RENAME CONSTRAINT response_request_pkey TO pozadavek_na_recenci_prispevku_pkey');
+        $this->addSql('ALTER TABLE response_request RENAME COLUMN reviewer_id TO recenzent_id');
+        $this->addSql('ALTER TABLE response_request RENAME COLUMN post_id TO prispevek_id');
+        $this->addSql('ALTER TABLE response_request RENAME COLUMN editor_id TO redaktor_id');
+        $this->addSql('ALTER TABLE response_request RENAME COLUMN start_review TO start_recenzniho_rizeni');
+        $this->addSql('ALTER TABLE response_request RENAME COLUMN end_review TO konec_recenzniho_rizeni');
+        $this->addSql('ALTER TABLE response_request RENAME TO pozadavek_na_recenci_prispevku');
     }
 }
