@@ -74,7 +74,7 @@
                                 {% if app.user %}
                                 <li class="nav-item">
                                     <a class="nav-link text-light" href="#"
-                                        >Přihlášen jako {{ app.user.jmeno }}</a
+                                        >Přihlášen jako {{ app.user.name }}</a
                                     >
                                 </li>
 
@@ -87,26 +87,26 @@
                                         <a class="dropdown-item" href="/admin"
                                             >Dashboard Admina</a
                                         >
-                                        {% elseif role == 'ROLE_AUTOR' %}
-                                        <a class="dropdown-item" href="/autor"
+                                        {% elseif role == 'ROLE_AUTHOR' %}
+                                        <a class="dropdown-item" href="/author"
                                             >Dashboard Autora</a
                                         >
-                                        {% elseif role == 'ROLE_RECENZENT' %}
+                                        {% elseif role == 'ROLE_REVIEWER' %}
                                         <a
                                             class="dropdown-item"
-                                            href="/recenze"
+                                            href="/review"
                                             >Dashboard Recenzenta</a
                                         >
-                                        {% elseif role == 'ROLE_REDAKTOR' %}
+                                        {% elseif role == 'ROLE_EDITOR' %}
                                         <a
                                             class="dropdown-item"
-                                            href="/redaktor"
+                                            href="/editor"
                                             >Dashboard Redaktora</a
                                         >
-                                        {% elseif role == 'ROLE_SEFREDAKTOR' %}
+                                        {% elseif role == 'ROLE_CHIEFEDITOR' %}
                                         <a
                                             class="dropdown-item"
-                                            href="/sefredaktor"
+                                            href="/chiefeditor"
                                             >Dashboard Šéfredaktora</a
                                         >
                                         {% else %}

@@ -1,11 +1,12 @@
 <?php
+declare(strict_types=1);
 
 // src/Controller/RegistrationController.php
 
 namespace App\Controller;
 
 use App\Form\RegistrationFormType;
-use App\Entity\Osoba;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Security\OsobaUserAdapter;
+use App\Security\UserAdapter;
 
 class RegistrationController extends AbstractController
 {
@@ -26,31 +27,31 @@ class RegistrationController extends AbstractController
         $this->logger = $logger;
     }
 
-    
+
     #[Route('/register', name: 'app_register', methods: ['GET', 'POST'])]
     public function register(Request $request, UserPasswordHasherInterface $passwordEncoder, EntityManagerInterface $entityManager): Response
     {
-        $osoba = new Osoba();
-        $form = $this->createForm(RegistrationFormType::class, $osoba);
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $osobaAdapter = new OsobaUserAdapter($osoba);
+            $userAdapter = new UserAdapter($user);
 
             // Hash the password using the adapter
             $hashedPassword = $passwordEncoder->hashPassword(
-                $osobaAdapter,
-                $osobaAdapter->getPassword()
+                $userAdapter,
+                $userAdapter->getPassword()
             );
-            $osobaAdapter->setPassword($hashedPassword);
+            $userAdapter->setPassword($hashedPassword);
 
-            // Now set the hashed password back to the original Osoba entity
-            $osoba->setHeslo($hashedPassword);
+            // Now set the hashed password back to the original user entity
+            $user->setPassword($hashedPassword);
 
-            $entityManager->persist($osoba);
+            $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_prispevek_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('security/registration.html.twig', [

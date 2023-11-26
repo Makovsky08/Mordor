@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Úprava recenze{% endblock %}
+
+{% block content %}
+    <h1>Úprava recenze</h1>
+
+    {{ include('review/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_review_index') }}">back to list</a>
+
+    {{ include('review/_delete_form.html.twig') }}
+{% endblock %}

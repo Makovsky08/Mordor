@@ -22,7 +22,7 @@ services:
 
     App\Form\DataTransformer\DateToStringTransformer:
 
-    App\Security\OsobaUserProvider:
-        arguments: ['@App\Repository\OsobaRepository']
+    App\Security\UserProvider:
+        arguments: ['@App\Repository\UserRepository']
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -1,4 +1,0 @@
-<form method="post" action="{{ path('app_osoba_delete', {'id': osoba.id}) }}" onsubmit="return confirm('Opravdu chcete smazat tento záznam?');" class="delete-form">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ osoba.id) }}">
-    <button class="btn btn-secondary mt-3">Smazat</button>
-</form>

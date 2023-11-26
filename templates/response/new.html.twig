@@ -1,0 +1,9 @@
+{# templates/response/new.html.twig #} {% extends 'base.html.twig' %} {% block
+title %}Námitky{% endblock %} {% block content %}
+<h2>Odeslat námitky</h2>
+
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<button type="submit" class="btn btn-success">Odeslat námitky</button>
+{{ form_end(form) }}
+{% endblock %}

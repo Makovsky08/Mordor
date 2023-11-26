@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Entity;
 
@@ -16,31 +17,31 @@ class Status
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Nazev = null;
+    private ?string $title = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Popis = null;
+    private ?string $description = null;
 
     #[ORM\ManyToOne(targetEntity: Role::class, inversedBy: 'roles')]
     #[ORM\JoinColumn(nullable:false)]
-    private ?Role $Zodpovedna_role = null;
+    private ?Role $responsible_role = null;
 
-    #[ORM\OneToMany(mappedBy: 'status', targetEntity: StatusPrispevku::class)]
-    private Collection $Status_Prispevku;
+    #[ORM\OneToMany(mappedBy: 'status', targetEntity: StatusPost::class)]
+    private Collection $status_post;
 
     public function __construct()
     {
-        $this->Status_Prispevku = new ArrayCollection();
+        $this->status_post = new ArrayCollection();
     }
 
-    public function getZodpovedna_role(): ?Role
+    public function getResponsibleRole(): ?Role
     {
-        return $this->Zodpovedna_role;
+        return $this->responsible_role;
     }
 
-    public function setZodpovedna_role(?Role $Zodpovedna_role): self
+    public function setResponsibleRole(?Role $responsibleRole): self
     {
-        $this->Zodpovedna_role = $Zodpovedna_role;
+        $this->responsible_role = $responsibleRole;
 
         return $this;
     }
@@ -50,66 +51,54 @@ class Status
         return $this->id;
     }
 
-    public function getNazev(): ?string
+    public function getTitle(): ?string
     {
-        return $this->Nazev;
+        return $this->title;
     }
 
-    public function setNazev(string $Nazev): static
+    public function setTitle(string $title): static
     {
-        $this->Nazev = $Nazev;
+        $this->title = $title;
 
         return $this;
     }
 
-    public function getPopis(): ?string
+    public function getDescription(): ?string
     {
-        return $this->Popis;
+        return $this->description;
     }
 
-    public function setPopis(string $Popis): static
+    public function setDescription(string $description): static
     {
-        $this->Popis = $Popis;
-
-        return $this;
-    }
-
-    public function getZodpovednaRole(): ?Role
-    {
-        return $this->Zodpovedna_role;
-    }
-
-    public function setZodpovednaRole(?Role $Zodpovedna_role): static
-    {
-        $this->Zodpovedna_role = $Zodpovedna_role;
+        $this->description = $description;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, StatusPrispevku>
+     * @return Collection<int, StatusPost>
      */
-    public function getStatusPrispevku(): Collection
+    public function getStatusPost(): Collection
     {
-        return $this->Status_Prispevku;
+        return $this->status_post;
     }
 
-    public function addStatusPrispevku(StatusPrispevku $statusPrispevku): static
+    public function addStatusPost(StatusPost $statusPost): static
     {
-        if (!$this->Status_Prispevku->contains($statusPrispevku)) {
-            $this->Status_Prispevku->add($statusPrispevku);
-            $statusPrispevku->setStatus($this);
+        if (!$this->status_post->contains($statusPost)) {
+            $this->status_post->add($statusPost);
+            $statusPost->setStatus($this);
         }
 
         return $this;
     }
 
-    public function removeStatusPrispevku(StatusPrispevku $statusPrispevku): static
+    public function removeStatusPost(StatusPost $statusPost): static
     {
-        if ($this->Status_Prispevku->removeElement($statusPrispevku)) {
+        if ($this->status_post->removeElement($statusPost)) {
             // set the owning side to null (unless already changed)
-            if ($statusPrispevku->getStatus() === $this) {
-                $statusPrispevku->setStatus(null);
+            if ($statusPost->getStatus() === $this) {
+                $statusPost->setStatus(null);
             }
         }
 
