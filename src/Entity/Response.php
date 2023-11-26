@@ -20,10 +20,10 @@ class Response
     private ?string $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'responsesFrom')]
-    private ?User $from = null;
+    private ?User $response_from = null;
 
     #[ORM\ManyToOne(inversedBy: 'responsesTo')]
-    private ?User $to = null;
+    private ?User $response_to = null;
 
     #[ORM\Column(length: 255)]
     private ?string $text = null;
@@ -90,26 +90,26 @@ class Response
         return $this;
     }
 
-    public function getFrom(): ?User
+    public function getResponseFrom(): ?User
     {
-        return $this->from;
+        return $this->response_from;
     }
 
-    public function setFrom(?User $from): static
+    public function setResponseFrom(?User $responseFrom): static
     {
-        $this->from = $from;
+        $this->response_from = $responseFrom;
 
         return $this;
     }
 
-    public function getTo(): ?User
+    public function getResponseTo(): ?User
     {
-        return $this->to;
+        return $this->response_to;
     }
 
-    public function setTo(?User $to): static
+    public function setResponseTo(?User $responseTo): static
     {
-        $this->to = $to;
+        $this->response_to = $responseTo;
 
         return $this;
     }
@@ -173,7 +173,7 @@ class Response
         if ($this->responses->removeElement($response)) {
             // set the owning side to null (unless already changed)
             if ($response->getResponseOn() === $this) {
-                $response->setResponseon(null);
+                $response->setResponseOn(null);
             }
         }
 

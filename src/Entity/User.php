@@ -211,7 +211,7 @@ class User
     {
         if (!$this->responseFrom->contains($response)) {
             $this->responseFrom->add($response);
-            $response->setFrom($this);
+            $response->setResponseFrom($this);
         }
 
         return $this;
@@ -221,8 +221,8 @@ class User
     {
         if ($this->responseFrom->removeElement($response)) {
             // set the owning side to null (unless already changed)
-            if ($response->getFrom() === $this) {
-                $response->setFrom(null);
+            if ($response->getResponseFrom() === $this) {
+                $response->setResponseFrom(null);
             }
         }
 
@@ -242,7 +242,7 @@ class User
     {
         if (!$this->responseTo->contains($response)) {
             $this->responseTo->add($response);
-            $response->setFrom($this);
+            $response->setResponseFrom($this);
         }
 
         return $this;
@@ -252,8 +252,8 @@ class User
     {
         if ($this->responseTo->removeElement($response)) {
             // set the owning side to null (unless already changed)
-            if ($response->getTo() === $this) {
-                $response->setTo(null);
+            if ($response->getResponseTo() === $this) {
+                $response->setResponseTo(null);
             }
         }
 
