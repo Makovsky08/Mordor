@@ -30,6 +30,9 @@ class Post
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: VersionPost::class, orphanRemoval: true)]
     private Collection $versionPosts;
 
+    #[ORM\OneToOne(mappedBy: 'post', targetEntity: VersionPost::class, orphanRemoval: true)]
+    private VersionPost $versionPost;
+
     #[ORM\ManyToMany(targetEntity: Release::class, mappedBy: 'post')]
     private Collection $release;
 
@@ -38,6 +41,9 @@ class Post
 
     #[ORM\OneToMany(mappedBy: 'related_post', targetEntity: Response::class)]
     private Collection $responses;
+
+    #[ORM\OneToMany(mappedBy: 'related_post', targetEntity: Review::class)]
+    private Collection $reviews;
 
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: ResponseRequest::class)]
     private Collection $responseRequests;
@@ -48,6 +54,7 @@ class Post
         $this->release = new ArrayCollection();
         $this->statusPosts = new ArrayCollection();
         $this->responses = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
         $this->responseRequests = new ArrayCollection();
     }
 
@@ -98,6 +105,11 @@ class Post
     public function getVersionPosts(): Collection
     {
         return $this->versionPosts;
+    }
+
+    public function getVersionPost(int $version): ?VersionPost
+    {
+        return $this->versionPosts->get($version);
     }
 
     public function addVersionPost(VersionPost $versionPost): static

@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\ResponseRequest;
 use App\Entity\Review;
+use App\Repository\ResponseReviewRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Form\ReviewForm;
 use App\Repository\ReviewRepository;
@@ -16,10 +18,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReviewController extends AbstractController
 {
     #[Route('/', name: 'app_review_index', methods: ['GET'])]
-    public function index(ReviewRepository $reviewRepository): Response
+    public function index(ReviewRepository $reviewRepository, ResponseReviewRepository $responseReviewRepository): Response
     {
         return $this->render('review/index.html.twig', [
             'reviews' => $reviewRepository->findAll(),
+            'userReviews' => $reviewRepository->findByUser(),
+            'requests' => $responseReviewRepository->findAll(),
         ]);
     }
 

@@ -46,4 +46,14 @@ class ReviewRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findByUser()
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.post', 'p', 'with', 'p.id = r.post')
+            ->where('r.reviewer = :reviewer')
+            ->setParameter('reviewer', 1)
+            ->getQuery()
+            ->getResult();
+    }
 }

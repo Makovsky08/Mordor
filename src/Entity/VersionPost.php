@@ -28,8 +28,8 @@ class VersionPost
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $version = null;
+//    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+//    private ?\DateTimeInterface $version = null;
 
     public function getId(): ?int
     {
@@ -84,6 +84,7 @@ class VersionPost
         return $this;
     }
 
+    /*
     public function getVersion(): ?\DateTimeInterface
     {
         return $this->version;
@@ -95,4 +96,5 @@ class VersionPost
 
         return $this;
     }
+    */
 }
