@@ -66,12 +66,12 @@ final class Version20231119124957 extends AbstractMigration
         $this->addSql('ALTER TABLE Vydani RENAME COLUMN Tematika TO topics');
         $this->addSql('ALTER TABLE Vydani RENAME COLUMN Kapacita TO capacity');
         $this->addSql('ALTER TABLE Vydani RENAME COLUMN cislo TO number');
-        $this->addSql('ALTER TABLE Release RENAME TO Release');
+        $this->addSql('ALTER TABLE Vydani RENAME TO Release');
 
-        $this->addSql('ALTER TABLE vydani_prispevku RENAME CONSTRAINT vydani_prispevku_pkey TO release_post_pkey');
-        $this->addSql('ALTER TABLE vydani_prispevku RENAME COLUMN vydani_id TO release_id');
-        $this->addSql('ALTER TABLE vydani_prispevku RENAME COLUMN prispevek_id TO post_id');
-        $this->addSql('ALTER TABLE vydani_prispevku RENAME TO release_post');
+        $this->addSql('ALTER TABLE vydani_prispevek RENAME CONSTRAINT vydani_prispevek_pkey TO release_post_pkey');
+        $this->addSql('ALTER TABLE vydani_prispevek RENAME COLUMN vydani_id TO release_id');
+        $this->addSql('ALTER TABLE vydani_prispevek RENAME COLUMN prispevek_id TO post_id');
+        $this->addSql('ALTER TABLE vydani_prispevek RENAME TO release_post');
 
         $this->addSql('ALTER TABLE verze_prispevku RENAME CONSTRAINT verze_prispevku_pkey TO version_post_pkey');
         $this->addSql('ALTER TABLE verze_prispevku RENAME COLUMN prispevek_id TO post_id');
