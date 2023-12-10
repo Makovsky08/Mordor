@@ -8,17 +8,22 @@ use App\Entity\Review;
 use App\Entity\StatusPost;
 use App\Entity\Status;
 use App\Form\ResponseType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ResponseController extends AbstractController
 {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager
+    ) {}
+
     #[Route('/response/new/{reviewId}', name: 'response_new')]
     public function new(Request $request, int $reviewId): \Symfony\Component\HttpFoundation\Response
     {
         $response = new Response();
-        $review = $this->getDoctrine()->getRepository(Review::class)->find($reviewId);
+        $review = $this->entityManager->getRepository(Review::class)->find($reviewId);
 
         if (!$review || $this->getUser() !== $review->getPost()->getAuthor()) {
             throw $this->createNotFoundException('Recenze nebo příspěvek nebyly nalezeny, nebo nemáte oprávnění.');
@@ -34,8 +39,8 @@ class ResponseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $statusObjection = $entityManager->getRepository(Status::class)->findOneBy(['title' => 'Námitky odeslány']);
+            $statusObjection = $this->entityManager->getRepository(Status::class)
+                ->findOneBy(['title' => 'Námitky odeslány']);
 
             $post = $review->getPrispevek();
 
@@ -44,9 +49,9 @@ class ResponseController extends AbstractController
             $newStatusPost->setStatus($statusObjection);
             $newStatusPost->setUpdatedAt(new \DateTime());
 
-            $entityManager->persist($response);
-            $entityManager->persist($newStatusPost);
-            $entityManager->flush();
+            $this->entityManager->persist($response);
+            $this->entityManager->persist($newStatusPost);
+            $this->entityManager->flush();
 
             $this->addFlash('success', 'Vaše námitky byly odeslány.');
             return $this->redirectToRoute('post_detail', ['id' => $review->getPost()->getId()]);
