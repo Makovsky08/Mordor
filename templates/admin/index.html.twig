@@ -41,39 +41,11 @@
 {% block content %}
 <div class="content-area">
     <h2>Admin dashboard</h2>
-    <h3><b>Přehled uživatelů:</b></h3>
-
-    <!-- Header Row -->
-    <div class="list-header">
-        <div class="list-cell">Id</div>
-        <div class="list-cell">Role</div>
-        <div class="list-cell">Jméno</div>
-        <div class="list-cell">Příjmení</div>
-        <div class="list-cell">Informace</div>
-    </div>
-    {% for user in users %}
-    <div class="list-row">
-        <div class="list-cell">{{ user.id }}</div>
-        <div class="list-cell">
-            {% for role in user.roles %}
-                {{ role }}
-                {% if not loop.last %}, {% endif %}
-            {% endfor %}
-        </div>
-        <div class="list-cell">{{ user.name }}</div>
-        <div class="list-cell">{{ user.surname }}</div>
-        <div class="list-cell"><a href="{{ path('app_user_show', {'id': user.id}) }}">Více informací</a></div>
-    </div>
-    {% else %}
-    <div class="list-row">
-        <div class="list-cell">No records found</div>
-    </div>
-    {% endfor %}
 
     <!-- Additional Actions -->
     {% if is_granted('ROLE_ADMIN') %}
     <div class="action-links">
-        <a href="{{ path('app_user_new') }}">Přidat nového uživatele</a>
+        <a href="{{ path('app_user_index') }}" role="button" class="btn btn-primary">Přehled všech uživatelů</a>
     </div>
     {% endif %}
 </div>

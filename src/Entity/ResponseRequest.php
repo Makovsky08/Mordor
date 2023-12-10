@@ -25,10 +25,10 @@ class ResponseRequest
     private ?User $editor = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $review_start = null;
+    private ?\DateTimeInterface $start_review = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $review_end = null;
+    private ?\DateTimeInterface $end_review = null;
 
     public function getId(): ?int
     {
@@ -71,26 +71,26 @@ class ResponseRequest
         return $this;
     }
 
-    public function getReviewStart(): ?\DateTimeInterface
+    public function getStartReview(): ?\DateTimeInterface
     {
-        return $this->review_start;
+        return $this->start_review;
     }
 
-    public function setReviewStart(\DateTimeInterface $reviewStart): static
+    public function setStartReview(\DateTimeInterface $reviewStart): static
     {
-        $this->review_start = $reviewStart;
+        $this->start_review = $reviewStart;
 
         return $this;
     }
 
-    public function getReviewEnd(): ?\DateTimeInterface
+    public function getEndReview(): ?\DateTimeInterface
     {
-        return $this->review_end;
+        return $this->end_review;
     }
 
-    public function setReviewEnd(\DateTimeInterface $reviewEnd): static
+    public function setEndReview(\DateTimeInterface $reviewEnd): static
     {
-        $this->review_end = $reviewEnd;
+        $this->end_review = $reviewEnd;
 
         return $this;
     }

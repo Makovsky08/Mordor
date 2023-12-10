@@ -57,4 +57,12 @@ class ResponseController extends AbstractController
             'post' => $review->getPost()
         ]);
     }
+
+    #[Route('/response/{id}', name: 'app_response_show', methods: ['GET'])]
+    public function show(Response $response): \Symfony\Component\HttpFoundation\Response
+    {
+        return $this->render('response/show.html.twig', [
+            'response' => $response,
+        ]);
+    }
 }

@@ -5,43 +5,61 @@
 {% block content %}
     <h1>Recenze</h1>
 
+    <h3 class="mt-5">Požadavky na recenzi</h3>
     <table class="table">
         <thead>
-        <tr>
-            <th>id</th>
-            <th>datum recenze</th>
-            <th>recenzent</th>
-            <th>text</th>
-            <th>aktualnost</th>
-            <th>originalita</th>
-            <th>odborná úroveň</th>
-            <th>stylistická úroveň</th>
-            <th>actions</th>
-        </tr>
+            <tr>
+                <th>id</th>
+                <th>Do kdy</th>
+                <th>Příspěvek</th>
+                <th>Autor</th>
+                <th>Akce</th>
+            </tr>
         </thead>
         <tbody>
-        {% for review in reviews %}
-            <tr>
-                <td>{{ review.id }}</td>
-                <td>{{ review.createdAt }}</td>
-                <td>{{ review.reviewer }}</td>
-                <td>{{ review.text }}</td>
-                <td>{{ review.topicality }}</td>
-                <td>{{ review.originality }}</td>
-                <td>{{ review.expertiseLevel }}</td>
-                <td>{{ review.stylisticsLevel }}</td>
-                <td>
-                    <a href="{{ path('app_review_show', {'id': review.id}) }}">show</a>
-                    <a href="{{ path('app_review_edit', {'id': review.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
+        {% for request in requests %}
+            <td>{{ request.id }}</td>
+            <td>{{ request.getStartReview() ? request.getStartReview()|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ request.getPost().id }}</td>
+            <td>{{ request.getPost().getAuthor() }}</td>
+            <td>
+
+                <a href="{{ path('app_review_new', {'post_id': request.getPost().id}) }}">Napsat recenzi</a>
+            </td>
+            {% else %}
+                <tr>
+                    <td colspan="5">Záznamy nenalezeny</td>
+                </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_review_new') }}">Create new</a>
+    <h3 class="mt-5">Seznam napsaných recenzíi</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Datum recenze</th>
+                <th>Příspěvek</th>
+                <th>Autor</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for userReview in userReviews %}
+            <td>{{ userReview.id }}</td>
+            <td>{{ userReview.createdAt }}</td>
+            <td>{{ userReview.getReviewPostTitle(userReview.id) }}</td>
+            <td>{{ userReview.getReviewPostAuthor().surname }}</td>
+            <td>
+                <a href="{{ path('app_review_show', {'id': userReview.id}) }}">Zobrazit detaily</a>
+                <a href="{{ path('app_review_edit', {'id': userReview.id}) }}">Upravit</a>
+            </td>
+            {% else %}
+                <tr>
+                    <td colspan="5">Záznamy nenalezeny</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

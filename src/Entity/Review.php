@@ -39,10 +39,14 @@ class Review
     private ?int $stylistics_level = null;
 
     #[ORM\OneToMany(mappedBy: 'review', targetEntity: Response::class)]
-    private Collection $reakce;
+    private Collection $response;
+
+    #[ORM\ManyToOne(targetEntity: Post::class)]
+    private Post $post;
 
     public function __construct() {
-        $this->reakce = new ArrayCollection();
+        $this->response = new ArrayCollection();
+        $this->post = new Post();
     }
 
     public function getId(): ?int
@@ -139,13 +143,13 @@ class Review
      */
     public function getResponse(): Collection
     {
-        return $this->reakce;
+        return $this->response;
     }
 
     public function addResponse(Response $response): static
     {
-        if (!$this->reakce->contains($response)) {
-            $this->reakce->add($response);
+        if (!$this->response->contains($response)) {
+            $this->response->add($response);
             $response->setReview($this);
         }
 
@@ -154,7 +158,7 @@ class Review
 
     public function removeResponse(Response $response): static
     {
-        if ($this->reakce->removeElement($response)) {
+        if ($this->response->removeElement($response)) {
             // set the owning side to null (unless already changed)
             if ($response->getReview() === $this) {
                 $response->setReview(null);
@@ -162,5 +166,15 @@ class Review
         }
 
         return $this;
+    }
+
+    public function getReviewPostTitle(int $version): ?string
+    {
+        return $this->post->getVersionPost($version)?->getTitle();
+    }
+
+    public function getReviewPostAuthor(): ?User
+    {
+        return $this->post->getAuthor();
     }
 }
