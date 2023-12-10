@@ -121,7 +121,7 @@ class UserAdapter implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function setPassword(string $password): static
     {
-        $this->user->setHeslo($password);
+        $this->user->setPassword($password);
 
         return $this;
     }
