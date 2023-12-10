@@ -23,8 +23,8 @@
             <td>{{ request.getPost().id }}</td>
             <td>{{ request.getPost().getAuthor() }}</td>
             <td>
-                <a href="{{ path('app_response_show', {'id': request.id}) }}">Zobrazit detaily</a>
-                <a href="{{ path('app_response_edit', {'id': request.id}) }}">Upravit</a>
+
+                <a href="{{ path('app_review_new', {'post_id': request.getPost().id}) }}">Napsat recenzi</a>
             </td>
             {% else %}
                 <tr>
