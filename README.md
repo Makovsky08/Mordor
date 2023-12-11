@@ -2,6 +2,10 @@
 
 Mordor app for RSP project.
 
+## Dokumentace a grafika
+- [Odkaz na dokumenty](https://github.com/Makovsky08/Mordor/tree/main/dokumenty)
+- [Odkaz na grafiku](https://github.com/Makovsky08/Mordor/tree/main/grafika)
+
 ## Getting Started
 
 1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
