@@ -5,7 +5,9 @@ namespace App\Controller;
 
 use App\Entity\ResponseRequest;
 use App\Entity\VersionPost;
+use App\Form\ResponseType;
 use App\Form\ReviewerSelectType;
+use App\Repository\ResponseRepository;
 use App\Repository\UserRepository;
 use App\Repository\VersionPostRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,11 +23,34 @@ class EditorController extends AbstractController
     ) {}
 
     #[Route('/editor', name: 'app_editor')]
-    public function index(VersionPostRepository $versionPostRepository): Response
+    public function index(): Response
     {
         return $this->render('editor/index.html.twig', [
+        ]);
+    }
+
+    #[Route('/editor/reviews', name: 'app_reviews')]
+    public function reviews(VersionPostRepository $versionPostRepository): Response
+    {
+        return $this->render('editor/reviews.html.twig', [
             'articles' => $versionPostRepository->findAll(),
             'form' => $this->createForm(ReviewerSelectType::class),
+        ]);
+    }
+
+    #[Route('/editor/response/new', name: 'app_response_add')]
+    public function addResponse(): Response
+    {
+        return $this->render('editor/new.html.twig', [
+            'form' => $this->createForm(ResponseType::class),
+        ]);
+    }
+
+    #[Route('/editor/responses', name: 'app_responses')]
+    public function responses(ResponseRepository $responseRepository): Response
+    {
+        return $this->render('editor/responses.html.twig', [
+            'responses' => $responseRepository->findAll(),
         ]);
     }
 

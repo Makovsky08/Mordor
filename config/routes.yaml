@@ -6,3 +6,7 @@ controllers:
 home:
     path: '/'
     controller: App\Controller\PostController::index
+    
+editor:
+    path: '/editor'
+    controller: App\Controller\EditorController::index
