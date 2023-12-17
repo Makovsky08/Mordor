@@ -44,6 +44,7 @@
     <div class="list-header">
         <div class="list-cell">Id příspěvku</div>
         <div class="list-cell">Téma</div>
+        <div class="list-cell">ID autora</div>
         <div class="list-cell">Jméno autora</div>
         <div class="list-cell">Vydání</div>
         <div class="list-cell">Informace</div>
@@ -52,26 +53,28 @@
         <div class="list-row">
             <div class="list-cell">{{ post.id }}</div>
             <div class="list-cell">{{ post.topics }}</div>
+            <div class="list-cell">{{ post.author.id }}</div> <!-- Display author's ID -->
             <div class="list-cell">{{ post.author }}</div>
             <div class="list-cell">
-                {% if releaseData[post.id] %}
-                    {% for release in releaseData[post.id] %}
-                        {{ release.id }}: {{ release.getTitle }}<br> <!-- Updated method name -->
-                    {% endfor %}
-                {% else %}
-                    Žádné vydání
-                {% endif %}
-            </div>
-            <div class="list-cell"><a href="{{ path('app_post_show', {'id': post.id}) }}">Více informací</a></div>
+            {% if releaseData[post.id] %}
+                {% for release in releaseData[post.id] %}
+                    {{ release.id }}: {{ release.title }}<br>  
+                {% endfor %}
+            {% else %}
+                Žádné vydání
+            {% endif %}
+        </div>
+            <div class="list-cell"><a href="{{ path('app_author_show', {'id': post.id}) }}">Více informací</a></div>
         </div>
     {% else %}
         <div class="list-row">
             <div class="list-cell">Žádné příspěvky</div>
         </div>
     {% endfor %}
+    
 </div>
 <div class="action-links">
-        <a href="{{ path('app_post_new') }}">Přidat nový příspěvek</a>
+        <a href="{{ path('app_author_new') }}">Přidat nový příspěvek</a>
 </div>
 
 

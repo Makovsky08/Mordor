@@ -46,6 +46,11 @@ class UserAdapter implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
     /**
      * Summary of getSurname
      * @return string|null
