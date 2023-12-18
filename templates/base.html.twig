@@ -64,6 +64,17 @@
                         </h1>
                     </header>
                     <nav class="navbar navbar-expand-lg d-block">
+                        <button
+                            class="navbar-toggler mb-4"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavDropdown"
+                            aria-controls="navbarNavDropdown"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                         <div
                             class="collapse navbar-collapse"
                             id="navbarNavDropdown"
@@ -72,36 +83,47 @@
                                 {% block user %}
                                 <!-- Přihlášený uživatel -->
                                 {% if app.user %}
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="#"
-                                        >Přihlášen jako {{ app.user.name }}</a
+                                <li class="nav-item-user">
+                                    <span class="text-light"
+                                        >Přihlášen jako
+                                        <span class="fw-bold">
+                                            {{ app.user.name }}</span
+                                        ></span
                                     >
                                 </li>
 
                                 <!-- Blok pro role uživatele -->
-                                <li class="nav-item">
-                                    Roles
+                                <li class="nav-item-role role-item">
+                                    Role:
                                     <div>
                                         {% for role in app.user.roles %} {% if
                                         role == 'ROLE_ADMIN' %}
-                                        <a class="dropdown-item" href="/admin"
+                                        <a
+                                            class="dropdown-item admin-item"
+                                            href="/admin"
                                             >Dashboard Admina</a
                                         >
                                         {% elseif role == 'ROLE_AUTHOR' %}
-                                        <a class="dropdown-item" href="/author"
+                                        <a
+                                            class="dropdown-item author-item"
+                                            href="/author"
                                             >Dashboard Autora</a
                                         >
                                         {% elseif role == 'ROLE_REVIEWER' %}
-                                        <a class="dropdown-item" href="/review"
+                                        <a
+                                            class="dropdown-item reviewer-item"
+                                            href="/review"
                                             >Dashboard Recenzenta</a
                                         >
                                         {% elseif role == 'ROLE_EDITOR' %}
-                                        <a class="dropdown-item" href="/editor"
+                                        <a
+                                            class="dropdown-item editor-item"
+                                            href="/editor"
                                             >Dashboard Redaktora</a
                                         >
                                         {% elseif role == 'ROLE_CHIEFEDITOR' %}
                                         <a
-                                            class="dropdown-item"
+                                            class="dropdown-item chiefeditor-item"
                                             href="/chiefeditor"
                                             >Dashboard Šéfredaktora</a
                                         >

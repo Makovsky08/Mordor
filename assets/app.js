@@ -17,6 +17,7 @@ import "./icons/logout.svg";
 import "./icons/password.svg";
 import "./icons/password-show.svg";
 
+import "bootstrap/js/dist/collapse";
 import initializeTogglePassword from "./js/toggle-password";
 import updateYear from "./js/update-year";
 
