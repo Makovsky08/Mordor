@@ -18,7 +18,9 @@ import "./icons/password.svg";
 import "./icons/password-show.svg";
 
 import initializeTogglePassword from "./js/toggle-password";
+import updateYear from "./js/update-year";
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeTogglePassword();
+  updateYear();
 });
