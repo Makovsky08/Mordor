@@ -46,10 +46,7 @@ class UserAdapter implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getUser(): User
-    {
-        return $this->user;
-    }
+
 
     /**
      * Summary of getSurname
@@ -157,6 +154,10 @@ class UserAdapter implements UserInterface, PasswordAuthenticatedUserInterface
      * Summary of getUsername
      * @return string
      */
+    public function getUserEntity(): User
+{
+    return $this->user;
+}
     public function getUsername(): string
     {
         // Adapt to use the appropriate method from the user entity

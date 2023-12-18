@@ -19,35 +19,52 @@ class AuthorController extends AbstractController
     private $security;
 
     public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
-
-    #[Route('/', name: 'app_author_index', methods: ['GET'])]
-public function index(PostRepository $postRepository): Response
 {
-    $userAdapter = $this->security->getUser();
-    if ($userAdapter instanceof UserAdapter) {
-        $user = $userAdapter->getUser();
-        $userId = $user->getId();
-        $posts = $postRepository->findBy(['author' => $userId]);
-    } else {
-        $this->addFlash('error', 'No valid user logged in.');
-        return $this->redirectToRoute('app_login'); // Replace with your actual login route
+    $this->security = $security;
+}
+
+
+#[Route('/', name: 'app_author_index', methods: ['GET'])]
+
+    public function index(PostRepository $postRepository): Response
+    {
+        $userAdapter = $this->security->getUser();
+
+      
+
+        // Get the User entity from the UserAdapter
+        $user = $userAdapter->getUserEntity();
+
+        // Fetch posts where the author's ID matches the logged-in user's ID
+        $posts = $postRepository->findBy(['author' => $user]);
+
+        $releaseData = [];
+        foreach ($posts as $post) {
+            $releases = $post->getRelease();
+            $releaseData[$post->getId()] = $releases;
+        }
+
+        return $this->render('author/index.html.twig', [
+            'posts' => $posts,
+            'releaseData' => $releaseData,
+        ]);
+    }
+    #[Route('/show/{id}', name: 'app_author_show', methods: ['GET'])]
+public function show(int $id, PostRepository $postRepository): Response
+{
+    $post = $postRepository->find($id);
+
+    if (!$post) {
+        throw $this->createNotFoundException('No post found for id '.$id);
     }
 
-    $releaseData = [];
-    foreach ($posts as $post) {
-        $releases = $post->getRelease();
-        $releaseData[$post->getId()] = $releases;
-    }
+    // Additional logic to handle the request
 
-    return $this->render('author/index.html.twig', [
-        'posts' => $posts,
-        'releaseData' => $releaseData,
+    return $this->render('author/show.html.twig', [
+        'post' => $post,
+        // other necessary data
     ]);
 }
-    
 
     
 

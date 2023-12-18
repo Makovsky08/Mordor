@@ -70,9 +70,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_post_index') }}">Zpět</a>
+    <a href="{{ path('app_author_index') }}">Zpět</a>
 
-    <a href="{{ path('app_post_edit', {'id': post.id}) }}">Editovat</a>
+    <a href="{{ path('app_author_edit', {'id': post.id}) }}">Editovat</a>
 
     {{ include('post/_delete_form.html.twig') }}
 {% endblock %}

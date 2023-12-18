@@ -62,7 +62,7 @@
                     Žádné vydání
                 {% endif %}
             </div>
-            <div class="list-cell"><a href="{{ path('app_author_show', {'id': prispevek.id}) }}">Více informací</a></div>
+            <div class="list-cell"><a href="{{ path('app_autor_show', {'id': prispevek.id}) }}">Více informací</a></div>
         </div>
     {% else %}
         <div class="list-row">
@@ -71,7 +71,7 @@
     {% endfor %}
 </div>
 <div class="action-links">
-        <a href="{{ path('app_author_new') }}">Přidat nový příspěvek</a>
+        <a href="{{ path('app_autor_new') }}">Přidat nový příspěvek</a>
 </div>
 
 

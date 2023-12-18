@@ -44,7 +44,6 @@
     <div class="list-header">
         <div class="list-cell">Id příspěvku</div>
         <div class="list-cell">Téma</div>
-        <div class="list-cell">ID autora</div>
         <div class="list-cell">Jméno autora</div>
         <div class="list-cell">Vydání</div>
         <div class="list-cell">Informace</div>
@@ -53,7 +52,6 @@
         <div class="list-row">
             <div class="list-cell">{{ post.id }}</div>
             <div class="list-cell">{{ post.topics }}</div>
-            <div class="list-cell">{{ post.author.id }}</div> <!-- Display author's ID -->
             <div class="list-cell">{{ post.author }}</div>
             <div class="list-cell">
             {% if releaseData[post.id] %}
