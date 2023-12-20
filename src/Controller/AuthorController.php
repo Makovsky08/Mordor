@@ -69,6 +69,11 @@ class AuthorController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $post = new Post();
+        $userAdapter = $this->security->getUser();
+        $user = $userAdapter->getUserEntity(); // Get the logged-in user entity
+
+        $post->setAuthor($user); // Set the logged-in user as the author of the post
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 

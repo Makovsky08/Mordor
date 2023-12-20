@@ -18,7 +18,6 @@ class PostType extends AbstractType
     {
         $builder
             ->add('topics')
-            ->add('author')
             ->add('release', EntityType::class, [
                 'class' => Release::class,
                 'choice_label' => function (Release $release) {
