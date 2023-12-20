@@ -18,12 +18,12 @@
             <div class="article-list-cell"></div>
         </div>
 
-        <!-- post Rows -->
-        {# for article in unpublished_articles #}
+            {# for article in unpublished_articles #}
+            {% for post in posts %}
             <div class="article-list-row fs-6 fw-semibold text-dark">
-                <div class="article-list-cell">date</div>
-                <div class="article-list-cell">title</div>
-                <div class="article-list-cell">author</div>
+                <div class="article-list-cell">{{ post.getCreatedAt|date('d.m.Y') }}</div>
+                <div class="article-list-cell">{{ post.topics }}</div>
+                <div class="article-list-cell">{{ post.author }}</div>
                 <div class="article-list-cell">
                     <a href="" class="btn btn-primary">Stáhnout</a>
                 </div>
@@ -34,7 +34,7 @@
                     <a href="" class="btn btn-primary">Zveřejnit</a>
                 </div>
             </div>
-        {# endfor #}
+            {% endfor %}
     </div>
 
     <h3 class="mt-5 fs-6 fw-bold">Zveřejněné články</h3>
