@@ -17,7 +17,7 @@ security:
             custom_authenticator: App\Security\UserAuthenticator
             logout:
                 path: app_logout
-                target: app_post_index
+                target: app_home
 
             remember_me:
                 secret: '%kernel.secret%'

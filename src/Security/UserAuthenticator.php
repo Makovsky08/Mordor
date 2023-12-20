@@ -56,10 +56,10 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
         if (empty($roles)) {
             // If no roles, redirect to default page
-            return new RedirectResponse($this->router->generate('app_post_index'));
+            return new RedirectResponse($this->router->generate('app_home'));
         } elseif (count($roles) > 1) {
             // If multiple roles, redirect to default page
-            return new RedirectResponse($this->router->generate('app_post_index'));
+            return new RedirectResponse($this->router->generate('app_home'));
         }
 
         // Define redirections based on roles

@@ -19,7 +19,6 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
     private $postDocFile;
-    private $postDocName;
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
@@ -51,6 +50,11 @@ class Post
 
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: ResponseRequest::class)]
     private Collection $responseRequests;
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $postDocName = null;
+
+
 
     public function __construct()
     {
