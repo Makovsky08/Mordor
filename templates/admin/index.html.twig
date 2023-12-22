@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block stylesheets %}
+{{ parent() }}
+<style>
+ .list-header, .list-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+.list-header {
+    font-weight: bold;
+}
+
+.list-cell {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+/* Assuming .list-header and .list-row are direct children of .list */
+.list > .list-header {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.list > .list-row:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .list-header, .list-row {
+        flex-direction: column;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="content-area">
+    <h2>Admin dashboard</h2>
+
+    <!-- Additional Actions -->
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="action-links">
+        <a href="{{ path('app_user_index') }}" role="button" class="btn btn-primary">Přehled všech uživatelů</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

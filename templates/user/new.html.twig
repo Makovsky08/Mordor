@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nová osoba{% endblock %}
+
+{% block content %}
+    <h1>Vytvořit novou osobu</h1>
+
+    {{ include('user/_form.html.twig') }}
+
+    <a href="{{ path('app_admin') }}">Zpět na Dashboard</a>
+{% endblock %}

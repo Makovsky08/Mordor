@@ -10,6 +10,13 @@ p {
     color: $dark;
 }
 
+.heading {
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
 .fs-14 {
     font-size: 0.875rem !important;
 }

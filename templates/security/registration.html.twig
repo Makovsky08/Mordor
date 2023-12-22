@@ -7,36 +7,45 @@
 
 <div class="form-flex">
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.jmeno) }}
-        {{ form_widget(registrationForm.jmeno, {'attr': {'class': 'form-control'
+        {{ form_label(registrationForm.name) }}
+        {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control'
+
 
 
         }}) }}
-        {{ form_errors(registrationForm.jmeno) }}
+        {{ form_errors(registrationForm.name) }}
     </div>
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.prijmeni) }}
-        {{ form_widget(registrationForm.prijmeni, {'attr': {'class': 'form-control'
+        {{ form_label(registrationForm.surname) }}
+        {{ form_widget(registrationForm.surname, {'attr': {'class': 'form-control'
+
+
 
 
         }}) }}
-        {{ form_errors(registrationForm.prijmeni) }}
+        {{ form_errors(registrationForm.surname) }}
     </div>
 </div>
 
 <div class="form-flex">
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.datum_narozeni) }}
-        {{ form_widget(registrationForm.datum_narozeni, {'attr': {'class': 'form-control'
+        {{ form_label(registrationForm.birthdate) }}
+        {{ form_widget(registrationForm.birthdate, {'attr': {'class': 'form-control'
+
+
+
 
 
         }}) }}
-        {{ form_errors(registrationForm.datum_narozeni) }}
+        {{ form_errors(registrationForm.birthdate) }}
     </div>
 
     <div class="form-group mb-4">
         {{ form_label(registrationForm.email) }}
         {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'
+
+
+
 
 
         }}) }}
@@ -46,33 +55,77 @@
 
 <div class="form-flex">
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.heslo.first) }}
-        {{ form_widget(registrationForm.heslo.first, {'attr': {'class': 'form-control'
+        {{ form_label(registrationForm.password.first) }}
+        <div class="position-relative">
+            {{ form_widget(registrationForm.password.first, {'attr': {'class': 'form-control', 'id': 'registrationPassword'
 
 
-        }}) }}
-        {{ form_errors(registrationForm.heslo.first) }}
+
+
+            }}) }}
+            <span id="toggleRegistrationPassword" class="password-toggle">
+                <svg id="registrationPasswordIcon" width="24" height="24">
+                    <use
+                        href="{{ asset('build/sprites.svg') ~ '#password' }}"
+                    ></use>
+                </svg>
+                <svg
+                    id="registrationPasswordShowIcon"
+                    width="24"
+                    height="24"
+                    style="display: none"
+                >
+                    <use
+                        href="{{ asset('build/sprites.svg') ~ '#password-show' }}"
+                    ></use>
+                </svg>
+            </span>
+        </div>
+        {{ form_errors(registrationForm.password.first) }}
     </div>
-
     <div class="form-group mb-4">
-        {{ form_label(registrationForm.heslo.second) }}
-        {{ form_widget(registrationForm.heslo.second, {'attr': {'class': 'form-control'
-
-
-        }}) }}
-        {{ form_errors(registrationForm.heslo.second) }}
+        {{ form_label(registrationForm.password.second) }}
+        <div class="position-relative">
+            {{ form_widget(registrationForm.password.second, {'attr': {'class': 'form-control', 'id': 'registrationPasswordConfirm'
+            }}) }}
+            <span
+                id="toggleRegistrationPasswordConfirm"
+                class="password-toggle"
+            >
+                <svg
+                    id="registrationPasswordConfirmIcon"
+                    width="24"
+                    height="24"
+                >
+                    <use
+                        href="{{ asset('build/sprites.svg') ~ '#password' }}"
+                    ></use>
+                </svg>
+                <svg
+                    id="registrationPasswordConfirmShowIcon"
+                    width="24"
+                    height="24"
+                    style="display: none"
+                >
+                    <use
+                        href="{{ asset('build/sprites.svg') ~ '#password-show' }}"
+                    ></use>
+                </svg>
+            </span>
+        </div>
+        {{ form_errors(registrationForm.password.second) }}
     </div>
 </div>
 
 <div class="form-flex">
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-lg btn-primary fs-6">
         {{ "Registrovat se" | trans }}
     </button>
-
-    <!-- Optional: Link to Log in if you have one -->
-    <a href="{{ path('app_login') }}" class="btn btn-primary">
-        {{ "Přihlásit se" | trans }}
-    </a>
+</div>
+<!-- Optional: Link to Log in if you have one -->
+<div class="py-3">
+    Máte již účet?
+    <a href="{{ path('app_login') }}"> Přihlaste se</a>
 </div>
 
 {{ form_end(registrationForm) }}

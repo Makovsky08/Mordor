@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seznam recenzí{% endblock %}
+
+{% block content %}
+    <h1>Recenze</h1>
+
+    <h3 class="mt-5">Požadavky na recenzi</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Do kdy</th>
+                <th>Příspěvek</th>
+                <th>Autor</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for request in requests %}
+            <td>{{ request.id }}</td>
+            <td>{{ request.getStartReview() ? request.getStartReview()|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ request.getPost().id }}</td>
+            <td>{{ request.getPost().getAuthor() }}</td>
+            <td>
+
+                <a href="{{ path('app_review_new', {'post_id': request.getPost().id}) }}">Napsat recenzi</a>
+            </td>
+            {% else %}
+                <tr>
+                    <td colspan="5">Záznamy nenalezeny</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 class="mt-5">Seznam napsaných recenzíi</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Datum recenze</th>
+                <th>Příspěvek</th>
+                <th>Autor</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for userReview in userReviews %}
+            <td>{{ userReview.id }}</td>
+            <td>{{ userReview.createdAt }}</td>
+            <td>{{ userReview.getReviewPostTitle(userReview.id) }}</td>
+            <td>{{ userReview.getReviewPostAuthor().surname }}</td>
+            <td>
+                <a href="{{ path('app_review_show', {'id': userReview.id}) }}">Zobrazit detaily</a>
+                <a href="{{ path('app_review_edit', {'id': userReview.id}) }}">Upravit</a>
+            </td>
+            {% else %}
+                <tr>
+                    <td colspan="5">Záznamy nenalezeny</td>
+                </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

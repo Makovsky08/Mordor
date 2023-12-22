@@ -59,11 +59,26 @@
                 <aside class="wrapper__aside bg-secondary">
                     <header class="pb-2">
                         <h1 class="heading lh-08">
-                            <strong class="d-block fs-2">Mordor</strong
-                            ><span class="fs-6 fw-normal">Časopis VŠPJ</span>
+                            <a href="{{ path('app_home') }}">
+                                <strong class="d-block fs-2">Mordor</strong
+                                ><span class="fs-6 fw-normal"
+                                    >Časopis VŠPJ</span
+                                >
+                            </a>
                         </h1>
                     </header>
                     <nav class="navbar navbar-expand-lg d-block">
+                        <button
+                            class="navbar-toggler mb-4"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarNavDropdown"
+                            aria-controls="navbarNavDropdown"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation"
+                        >
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                         <div
                             class="collapse navbar-collapse"
                             id="navbarNavDropdown"
@@ -72,41 +87,48 @@
                                 {% block user %}
                                 <!-- Přihlášený uživatel -->
                                 {% if app.user %}
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="#"
-                                        >Přihlášen jako {{ app.user.jmeno }}</a
+                                <li class="nav-item-user">
+                                    <span class="text-light"
+                                        >Přihlášen jako
+                                        <span class="fw-bold">
+                                            {{ app.user.name }}</span
+                                        ></span
                                     >
                                 </li>
 
                                 <!-- Blok pro role uživatele -->
-                                <li class="nav-item">
-                                    Roles
+                                <li class="nav-item-role role-item">
+                                    Role:
                                     <div>
                                         {% for role in app.user.roles %} {% if
                                         role == 'ROLE_ADMIN' %}
-                                        <a class="dropdown-item" href="/admin"
+                                        <a
+                                            class="dropdown-item admin-item"
+                                            href="/admin"
                                             >Dashboard Admina</a
                                         >
-                                        {% elseif role == 'ROLE_AUTOR' %}
-                                        <a class="dropdown-item" href="/autor"
+                                        {% elseif role == 'ROLE_AUTHOR' %}
+                                        <a
+                                            class="dropdown-item author-item"
+                                            href="/author"
                                             >Dashboard Autora</a
                                         >
-                                        {% elseif role == 'ROLE_RECENZENT' %}
+                                        {% elseif role == 'ROLE_REVIEWER' %}
                                         <a
-                                            class="dropdown-item"
-                                            href="/recenze"
+                                            class="dropdown-item reviewer-item"
+                                            href="/review"
                                             >Dashboard Recenzenta</a
                                         >
-                                        {% elseif role == 'ROLE_REDAKTOR' %}
+                                        {% elseif role == 'ROLE_EDITOR' %}
                                         <a
-                                            class="dropdown-item"
-                                            href="/redaktor"
+                                            class="dropdown-item editor-item"
+                                            href="/editor"
                                             >Dashboard Redaktora</a
                                         >
-                                        {% elseif role == 'ROLE_SEFREDAKTOR' %}
+                                        {% elseif role == 'ROLE_CHIEFEDITOR' %}
                                         <a
-                                            class="dropdown-item"
-                                            href="/sefredaktor"
+                                            class="dropdown-item chiefeditor-item"
+                                            href="/chiefeditor"
                                             >Dashboard Šéfredaktora</a
                                         >
                                         {% else %}
@@ -120,7 +142,12 @@
                                 navbar %} {% include 'navbar.html.twig' %} {%
                                 endblock %} {% if app.user %}
                                 <li
-                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_logout' ? 'active' : '' }}"
+                                    class="nav-item d-flex align-items-center gap-2 {{
+                                        app.request.attributes.get('_route') ==
+                                        'app_logout'
+                                            ? 'active'
+                                            : ''
+                                    }}"
                                 >
                                     <svg width="32" height="32">
                                         <use
@@ -135,7 +162,12 @@
                                 </li>
                                 {% else %}
                                 <li
-                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_login' ? 'active' : '' }}"
+                                    class="nav-item d-flex align-items-center gap-2 {{
+                                        app.request.attributes.get('_route') ==
+                                        'app_login'
+                                            ? 'active'
+                                            : ''
+                                    }}"
                                 >
                                     <svg width="32" height="32">
                                         <use
@@ -149,7 +181,12 @@
                                     >
                                 </li>
                                 <li
-                                    class="nav-item d-flex align-items-center gap-2 {{ app.request.attributes.get('_route') == 'app_register' ? 'active' : '' }}"
+                                    class="nav-item d-flex align-items-center gap-2 {{
+                                        app.request.attributes.get('_route') ==
+                                        'app_register'
+                                            ? 'active'
+                                            : ''
+                                    }}"
                                 >
                                     <svg width="32" height="32">
                                         <use
@@ -187,7 +224,8 @@
                     >
                         <div class="footer__left">Mordor</div>
                         <div class="footer__right">
-                            &copy; 2023 | All rights reserved.
+                            &copy; <span class="year"></span> | All rights
+                            reserved.
                         </div>
                     </footer>
                 </div>

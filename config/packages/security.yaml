@@ -4,20 +4,20 @@ security:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        osoba_provider:
-            id: App\Security\OsobaUserProvider
+        user_provider:
+            id: App\Security\UserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: osoba_provider
-            entry_point: App\Security\OsobaAuthenticator
-            custom_authenticator: App\Security\OsobaAuthenticator
+            provider: user_provider
+            entry_point: App\Security\UserAuthenticator
+            custom_authenticator: App\Security\UserAuthenticator
             logout:
                 path: app_logout
-                target: app_prispevek_index
+                target: app_home
 
             remember_me:
                 secret: '%kernel.secret%'
@@ -35,10 +35,10 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/recenzent, roles: ROLE_RECENZENT }
-        - { path: ^/autor, roles: ROLE_AUTOR }
-        - { path: ^/sefredaktor, roles: ROLE_SEFREDAKTOR }
-        - { path: ^/redaktor, roles: ROLE_REDAKTOR }
+        - { path: ^/review, roles: ROLE_REVIEWER }
+        - { path: ^/author, roles: ROLE_AUTHOR }
+        - { path: ^/chiefeditor, roles: ROLE_CHIEFEDITOR }
+        - { path: ^/editor, roles: ROLE_EDITOR }
 
 when@test:
     security:

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stav příspěvku{% endblock %}
+
+{% block content %}
+    <h1>Stav příspěvku</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Příspěvek</th>
+                <th>Status</th>
+                <th>Datum zmeny</th>
+                <th>akce</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for statusPost in statusPosts %}
+            <tr>
+                <td>{{ statusPost.id }}</td>
+                <td><a href="{{ path('app_post_show', {'id': statusPost.post.id}) }}">{{ statusPost.post.id }}</a></td>
+                <td>{{ statusPost.status.title }}</td>
+                <td>{{ statusPost.updatedAt ? statusPost.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_status_post_show', {'id': statusPost.id}) }}">show</a>
+                    <a href="{{ path('app_status_post_edit', {'id': statusPost.id}) }}">upravit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

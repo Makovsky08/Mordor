@@ -16,7 +16,7 @@ body {
 .wrapper__main {
     position: relative;
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 1fr;
     gap: 10px;
     border-radius: 2rem;
     box-shadow: 0 40px 30px rgba(#383896, 0.15);
@@ -34,17 +34,21 @@ body {
 }
 
 .wrapper__aside {
-    padding: 3rem 2.5rem;
-    border-radius: 2rem 0 0 2rem;
+    padding: 2rem;
+    border-radius: 2rem 2rem 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapper__content {
     padding: 1.2rem 3rem;
 }
 
-
 /* Articles */
-.article-list-header, .article-list-row {
+.article-list-header,
+.article-list-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,9 +61,22 @@ body {
 }
 
 .article-list-row {
-    transition: all .2s ease-out;
+    transition: all 0.2s ease-out;
     border-radius: 1rem;
     &:hover {
-        box-shadow: 0 10px 20px 0 rgba(#DFDFFD, .6);
+        box-shadow: 0 10px 20px 0 rgba(#dfdffd, 0.6);
+    }
+}
+
+// Breakpoints lg
+@include media-breakpoint-up(lg) {
+    .wrapper__main {
+        grid-template-columns: 280px 1fr;
+    }
+    .wrapper__aside {
+        display: block;
+
+        padding: 3rem 2.5rem;
+        border-radius: 2rem 0 0 2rem;
     }
 }

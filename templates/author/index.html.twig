@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Autor{% endblock %}
+
+{% block content %}
+<style>
+ .list-header, .list-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+}
+.list-header {
+    font-weight: bold;
+}
+
+.list-cell {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+/* Assuming .list-header and .list-row are direct children of .list */
+.list > .list-header {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.list > .list-row:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .list-header, .list-row {
+        flex-direction: column;
+    }
+}
+</style>
+
+<div class="content">
+    <h2>Autor</h2>
+    <h3>Příspěvky</h3>
+
+    <!-- Header Row -->
+    <div class="list-header">
+        <div class="list-cell">Id</div>
+        <div class="list-cell">Datum vytvoření</div>
+        <div class="list-cell">Téma</div>
+        <div class="list-cell">Jméno autora</div>
+        <div class="list-cell">Informace</div>
+    </div>
+    {% for post in posts %}
+        <div class="list-row">
+            <div class="list-cell">{{ post.id }}</div>
+            <div class="list-cell">{{ post.getCreatedAt|date('d.m.Y H:i') }}</div>
+            <div class="list-cell">{{ post.topics }}</div>
+            <div class="list-cell">{{ post.author }}</div>
+            
+            <div class="list-cell"><a href="{{ path('app_author_show', {'id': post.id}) }}">Více informací</a></div>
+        </div>
+    {% else %}
+        <div class="list-row">
+            <div class="list-cell">Žádné příspěvky</div>
+        </div>
+    {% endfor %}
+    
+</div>
+<div class="action-links">
+        <a href="{{ path('app_author_new') }}">Přidat nový příspěvek</a>
+</div>
+
+
+{% endblock %}

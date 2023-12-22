@@ -1,31 +1,24 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Osoba;
-use App\Form\OsobaType;
-use App\Repository\OsobaRepository;
-use App\Security\OsobaUserAdapter;
-use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Repository\UserRepository;
 
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(OsobaRepository $osobaRepository): Response
+    public function index(UserRepository $userRepository): Response
     {
-        // Fetch all 'Osoba' entities from the database
-        $osobas = $osobaRepository->findAll();
+        // Fetch all 'user' entities from the database
+        $users = $userRepository->findAll();
 
-        // Render the 'Admin/index.html.twig' template, passing 'osobas' as a variable
-        return $this->render('Admin/index.html.twig', [
-            'osobas' => $osobas,
+        // Render the 'admin/index.html.twig' template, passing 'users' as a variable
+        return $this->render('admin/index.html.twig', [
+            'users' => $users,
         ]);
     }
 }
