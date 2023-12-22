@@ -11,19 +11,27 @@
                 <th>Id</th>
                 <th>Datum vytvoření</th>
                 <th>Tématika</th>
-                <th>Akce</th>
+                <th>Autor</th>
+                <th>Stáhnout</th>
+
             </tr>
         </thead>
         <tbody>
         {% for post in posts %}
             <tr>
                 <td>{{ post.id }}</td>
-                <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ post.createdAt ? post.createdAt|date('d.m.Y H:i') : '' }}</td>
                 <td>{{ post.topics }}</td>
+                <td>{{ post.author }}</td>
                 <td>
-                    <a href="{{ path('app_post_show', {'id': post.id}) }}">Zobrazit detaily</a>
-                    <a href="{{ path('app_post_edit', {'id': post.id}) }}">Upravit</a>
-                </td>
+                {% if post.postDocName %}
+                    <a href="{{ asset('uploads/post_docs/' ~ post.postDocName) }}" download>Stáhnout Dokument</a>
+
+
+                {% else %}
+                    Žádný dokument
+                {% endif %}
+            </td>
             </tr>
         {% else %}
             <tr>
@@ -33,5 +41,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_post_new') }}">Nový příspěvek</a>
+    
 {% endblock %}
