@@ -1,6 +1,7 @@
 {
   "build/app_js.js": "/build/app_js.js",
   "build/runtime.js": "/build/runtime.js",
+  "build/vendors-node_modules_bootstrap_js_dist_collapse_js-node_modules_core-js_modules_es_date_to-st-8a7f5e.js": "/build/vendors-node_modules_bootstrap_js_dist_collapse_js-node_modules_core-js_modules_es_date_to-st-8a7f5e.js",
   "build/assets_styles_app_scss.css": "/build/assets_styles_app_scss.css",
   "build/sprites.svg": "/build/sprites.50218b7fb2d7ce0932d02528dada4a23.svg",
   "build/images/password-show.svg": "/build/images/password-show.c8c75599.svg",
@@ -11,5 +12,6 @@
   "build/images/logout.svg": "/build/images/logout.e0b44818.svg",
   "build/images/about.svg": "/build/images/about.c59bc9f9.svg",
   "build/images/login.svg": "/build/images/login.5c18b2df.svg",
-  "build/images/add.svg": "/build/images/add.f82755a0.svg"
+  "build/images/add.svg": "/build/images/add.f82755a0.svg",
+  "build/vendors-node_modules_bootstrap_js_dist_collapse_js.js": "/build/vendors-node_modules_bootstrap_js_dist_collapse_js.js"
 }
