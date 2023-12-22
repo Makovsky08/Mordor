@@ -115,6 +115,17 @@ class AuthorController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/delete/{id}', name: 'app_author_delete', methods: ['POST'])]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function delete(Request $request, Post $post, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($post);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_author_index');
+    }
 
     private function handleFileUpload($form, $post)
     {
